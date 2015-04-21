@@ -1,7 +1,9 @@
 #include <stdlib.h>
 #define FILTERSIZE 4096
 struct bloom_filter {
-  unsigned char[FILTERSIZE] bytes;
+  unsigned char* bytes = malloc(FILTERSIZE);
+  int k;
+  int size = FILTERSIZE;
 }
 // adds a word to the bloom filter
 void add_word(char* word, struct bloom_filter* filter);
