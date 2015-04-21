@@ -24,9 +24,6 @@ unsigned int hash(char *str)
 void set_to_one(int index, struct bloom_filter* filter) {
     int byte = index / 8;
     int offset = index % 8;
-    printf("the offset is %d\n", int_pow(2,offset));
-    printf("before it was %d\n", filter->bytes[byte]);
-    printf("now it should be %d\n", filter->bytes[byte] | int_pow(2, offset));
     filter->bytes[byte] |= (char) int_pow(2, offset);
 
 }
