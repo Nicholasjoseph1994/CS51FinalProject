@@ -11,15 +11,15 @@ typedef struct hash_elt
     struct hash_elt *next;
     char* word;
     int freq;
-}hash_elt;
+} hash_elt;
 
 typedef struct hash_table
 {
     hash_elt** lists;
     int buckets;
-}hash_table;
+} hash_table;
 // creates a dictionary
-hash_table* create(void);
+hash_table* create(int buckets);
 
 // checks if a word is in the hashtable
 bool check(char* word, hash_table* mytable);
