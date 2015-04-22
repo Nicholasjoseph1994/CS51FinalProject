@@ -11,7 +11,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-int print_test(hash_table* mydict);
+void print_test(hash_table* mydict);
 
 int main(void)
 {
@@ -19,25 +19,22 @@ int main(void)
     add_word("first", mydict);
     add_word("second", mydict);
     
+    printf("everything has been added\n");
     print_test(mydict);
  
 }
 
-int print_test(hash_table* mydict)
+void print_test(hash_table* mydict)
 {
     for (int i = 0; i < (HASHSIZE - 1); i++)
     {
         hash_elt* element = mydict->lists[i];
         while (element != NULL)
         {
-            printf("start \n");
-
             printf("%s \n", element->word);
-            element = element->next;
+            element = element -> next;
         }
-
     }
-    return 0;
 }
 hash_table* create(int buckets)
 {
