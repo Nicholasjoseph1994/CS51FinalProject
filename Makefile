@@ -3,17 +3,17 @@
 CC = clang
 
 # flags to pass compiler
-CFLAGS = -ggdb3 -O0 -Qunused-arguments -std=c99 -Wall -Werror
+CFLAGS = -g -ggdb3 -O0 -Qunused-arguments -std=c99 -Wall -Werror
 
 # name for executable
-EXE = bloom
+EXE = hashtable
 
 # space-separated list of header files
-HDRS = bloom.h
+HDRS = hashtable.h
 # HDRS = bloom.h hashtable.h
 
 # space-separated list of source files
-SRCS = bloomtest.c bloom.c
+SRCS = hashtable.c
 # SRCS = bloomtest.c bloom.c hashtable.c
 
 # automatically generated list of object files
