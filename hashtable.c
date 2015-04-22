@@ -18,9 +18,12 @@ int main(void)
     hash_table* mydict = create(HASHSIZE);
     add_word("first", mydict);
     add_word("second", mydict);
-    
-    printf("everything has been added\n");
+    add_word("first", mydict); 
     print_test(mydict);
+    bool x = check("first", mydict);
+    printf(x ? "yes":"no");
+    bool y = check("foo", mydict);
+    printf(y ? "yes" : "no");
  
 }
 
@@ -31,7 +34,7 @@ void print_test(hash_table* mydict)
         hash_elt* element = mydict->lists[i];
         while (element != NULL)
         {
-            printf("%s \n", element->word);
+            printf("%s, %d \n", element->word, element->freq);
             element = element -> next;
         }
     }
@@ -88,7 +91,6 @@ void add_word(char* word, hash_table* mytable)
     {
         for (hash_elt* element = mytable->lists[hash_value]; element!= NULL; element = element->next)
         {
-            printf("%s", element->word);
             if (strcasecmp(word,element->word) == 0)
             {
                 (element->freq)++;
