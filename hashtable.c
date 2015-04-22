@@ -27,36 +27,14 @@ int print_test(hash_table* mydict)
 {
     for (int i = 0; i < (HASHSIZE - 1); i++)
     {
-        //hash_elt* element = malloc(sizeof(hash_elt)); 
-        printf("start outside \n");
-        char* word = mydict->lists[i]->word;
-        if (word != NULL)
-        {        
-            printf("%s \n", word);
-            i++; 
-    
-        }
-        else 
-        {
-            printf("pointer must have been null \n");
-            i++;
-        }
-
-        /*char* word = malloc(sizeof(char) * 15);
-        element = mydict->lists[i];
-        word = element->word;
-
-        printf("%s \n", word);
-        printf("we are at: %d \n", i);
-        i++;
+        hash_elt* element = mydict->lists[i];
         while (element != NULL)
         {
             printf("start \n");
+
             printf("%s \n", element->word);
             element = element->next;
         }
-        */
-        //i++;
 
     }
     return 0;
