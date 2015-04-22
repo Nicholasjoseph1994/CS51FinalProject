@@ -11,8 +11,7 @@ int int_pow(int base, int exp) {
     return ret;
 }
 //djb2 hash from http://www.cse.yorku.ca/~oz/hash.html
-unsigned int hash(char *str)
-{
+unsigned int hash(char *str) {
     int hash = 5381;
     int c;
 

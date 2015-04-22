@@ -15,7 +15,7 @@ int print_test(hash_table* mydict);
 
 int main(void)
 {
-    hash_table* mydict = create();
+    hash_table* mydict = create(HASHSIZE);
     add_word("first", mydict);
     add_word("second", mydict);
     
@@ -38,9 +38,14 @@ int print_test(hash_table* mydict)
     }
     return 0;
 }
-hash_table* create(void)
+hash_table* create(int buckets)
 {
-   hash_table* table = malloc(sizeof(*table) * HASHSIZE);
+   hash_table* table = malloc(sizeof(hash_table));
+   table->buckets = buckets;
+   table->lists = malloc(sizeof(hash_elt*) * table->buckets);
+   for (int i = 0; i < table->buckets; i++) {
+       table->lists[i] = NULL;
+   }
    return table;
 }
 
