@@ -27,13 +27,36 @@ int print_test(hash_table* mydict)
 {
     for (int i = 0; i < (HASHSIZE - 1); i++)
     {
-        hash_elt* element = mydict->lists[i];
+        //hash_elt* element = malloc(sizeof(hash_elt)); 
+        printf("start outside \n");
+        char* word = mydict->lists[i]->word;
+        if (word != NULL)
+        {        
+            printf("%s \n", word);
+            i++; 
+    
+        }
+        else 
+        {
+            printf("pointer must have been null \n");
+            i++;
+        }
+
+        /*char* word = malloc(sizeof(char) * 15);
+        element = mydict->lists[i];
+        word = element->word;
+
+        printf("%s \n", word);
+        printf("we are at: %d \n", i);
+        i++;
         while (element != NULL)
         {
+            printf("start \n");
             printf("%s \n", element->word);
             element = element->next;
         }
-        i++;
+        */
+        //i++;
 
     }
     return 0;
@@ -103,9 +126,11 @@ void add_word(char* word, hash_table* mytable)
     if (new_elt == NULL)
         return;
     new_elt->word = word;
+    printf("word added by add_word: %s \n", word);
     new_elt->freq = 1;
     new_elt->next = mytable->lists[hash_value];
     mytable->lists[hash_value] = new_elt;
+    printf("dict value: %s \n", mytable->lists[hash_value]->word);
     return;
 }
 
