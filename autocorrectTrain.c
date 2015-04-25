@@ -23,8 +23,26 @@ split* splits (char* word) {
     }
 }
 /* I did splits but if you can fill these in that would be awesome */
+
+/* why is this returning a char**, shouldn't it return some sort of array of char** or char*/
 char** deletes(split* splits) {
-    return NULL;
+    if splits != NULL then
+    {
+        int len = strlen(splits[0]->start) + 1;
+        for (int i = 0; i < len; i++)
+        {
+            if splits[i]->end = NULL then
+            {
+
+            }
+            else 
+            {
+
+            }
+
+        }
+    } 
+        
 }
 char** transposes(split* splits) {
     return NULL;
