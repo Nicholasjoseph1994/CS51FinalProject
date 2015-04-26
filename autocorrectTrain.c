@@ -25,30 +25,58 @@ split* splits (char* word) {
 /* I did splits but if you can fill these in that would be awesome */
 
 /* why is this returning a char**, shouldn't it return some sort of array of char** or char*/
-char** deletes(split* splits) {
-    if splits != NULL then
+char** deletes(split* splits, int splitslen) {
+    if (splits != NULL) 
     {
-        int len = strlen(splits[0]->start) + 1;
-        for (int i = 0; i < len; i++)
+        char** strarry = malloc(splitslen*sizeof(char*))
+        for (int i = 0; i < splitslen; i++)
         {
-            if splits[i]->end = NULL then
+            if (splits[i]->end = "") 
             {
-
+                strarray[i] = strcat(splits[i]->start, "")
             }
             else 
             {
-
+                strarray[i] = strcat(splits[i]->start, (splits[i]->end)++)
             }
 
         }
     } 
         
 }
-char** transposes(split* splits) {
-    return NULL;
+char** transposes(split* splits, int splitslen) {
+    if (splits != NULL)
+    {
+        char** strarray = malloc(splitslen * sizeof(char*));
+        for (int i = 0; i < splitslen; i++)
+        {
+            if (splits[i]->end = "")
+            {
+                strarray[i] = strcat(splits[i]->start, "")
+            }
+            else
+            {
+                char* temp = malloc(3 * sizeof(char));
+                temp [0] = (splits[i] -> end) [1];
+                temp [1] = (splits[i] -> end) [0];
+                temp [2] = '/0';
+                char* newend = strcat(temp, ((splits[i]->end)++)++);
+                strarray[i] = strcat(splits[i]->start, newend);
+            }
+        }
+    }
 }
-char** replaces(split* splits) {
-    return NULL;
+char** replaces(split* splits, int splitslen) {
+    char* alphabet = "abcdefghijklmnopqrstuvwxyz";
+    int alphalen = strlen(alphabet);
+    for (int i = 0; i < alphalen; i++)
+    {
+        for (int j = 0; j < splitslen; j++)
+        {
+            
+        }
+    }
+
 }
 char** inserts(split* splits) {
     return NULL;
