@@ -29,6 +29,9 @@ hashtable: hashtable.o hashtable.h Makefile
 bloom: bloom.o bloomtest.o bloom.h Makefile
 	$(CC) $(CFLAGS) -o $@ bloom.o  bloomtest.o
 
+trie: trie.o trie.h Makefile
+	$(CC) $(CFLAGS) -o $@ trie.o 
+
 # dependencies
 #$(OBJS): $(HDRS) Makefile
 
