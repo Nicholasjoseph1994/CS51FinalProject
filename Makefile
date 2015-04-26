@@ -21,7 +21,7 @@ OBJS = $(SRCS:.c=.o)
 
 
 # default target
-all: hashtable bloom
+all: hashtable bloom trie autocorrect
 
 hashtable: hashtable.o hashtable.h Makefile
 	$(CC) $(CFLAGS) -o $@ hashtable.o 
@@ -31,6 +31,9 @@ bloom: bloom.o bloomtest.o bloom.h Makefile
 
 trie: trie.o trie.h Makefile
 	$(CC) $(CFLAGS) -o $@ trie.o 
+
+autocorrect: autocorrectTrain.o autocorrectTrainTest.o autocorrectTrain.h Makefile
+	$(CC) $(CFLAGS) -o $@ autocorrectTrain.o  autocorrectTrainTest.o
 
 # dependencies
 #$(OBJS): $(HDRS) Makefile
