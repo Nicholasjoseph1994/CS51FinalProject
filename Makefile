@@ -6,14 +6,14 @@ CC = clang
 CFLAGS = -g -ggdb3 -O0 -Qunused-arguments -std=c99 -Wall -Werror
 
 # name for executable
-# EXE = hashtable
+EXE = hashtable
 
 # space-separated list of header files
-# HDRS = hashtable.h
+HDRS = hashtable.h
 # HDRS = bloom.h hashtable.h
 
 # space-separated list of source files
-# SRCS = hashtable.c
+SRCS = hashtable.c
 # SRCS = bloomtest.c bloom.c hashtable.c
 
 # automatically generated list of object files
@@ -27,7 +27,7 @@ hashtable: hashtable.c hashtable.h Makefile
 	$(CC) $(CFLAGS) -o $@ hashtable.o 
 
 bloom: bloom.c bloomtest.c bloom.h Makefile
-	$(CC) $(CFLAGS) -o $@ bloom.o bloomtest.o
+	$(CC) $(CFLAGS) -o $@ bloom.o  bloomtest.o
 
 # dependencies
 #$(OBJS): $(HDRS) Makefile
