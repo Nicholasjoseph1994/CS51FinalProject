@@ -21,11 +21,16 @@ OBJS = $(SRCS:.c=.o)
 
 
 # default target
-$(EXE): $(OBJS) $(HDRS) Makefile
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS)
+all: hashtable bloom
+
+hashtable: hashtable.c hashtable.h Makefile
+	$(CC) $(CFLAGS) -o $@ hashtable.o 
+
+bloom: bloom.c bloomtest.c bloom.h Makefile
+	$(CC) $(CFLAGS) -o $@ bloom.o  bloomtest.o
 
 # dependencies
-$(OBJS): $(HDRS) Makefile
+#$(OBJS): $(HDRS) Makefile
 
 # housekeeping
 clean:

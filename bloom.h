@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #define FILTERSIZE 4096
+#define K 4
 struct bloom_filter {
   unsigned char* bytes;
   int k;

@@ -57,6 +57,6 @@ void print_filter(struct bloom_filter* filter) {
 }
 void initialize(struct bloom_filter* filter) {
     filter->size = FILTERSIZE;
-    filter->k = 1;
+    filter->k = K;
     filter->bytes = malloc(filter->size);
 }
