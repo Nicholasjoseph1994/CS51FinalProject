@@ -69,14 +69,31 @@ char** transposes(split* splits, int splitslen) {
 char** replaces(split* splits, int splitslen) {
     char* alphabet = "abcdefghijklmnopqrstuvwxyz";
     int alphalen = strlen(alphabet);
-    for (int i = 0; i < alphalen; i++)
+    char** strarray = malloc(splitslen * alphalen * sizeof(char*));
+    if (splits != NULL)
     {
-        for (int j = 0; j < splitslen; j++)
+        for (int i = 0; i < alphalen; i++)
         {
-            
+            for (int j = 0; j < splitslen; j++)
+            {
+                if (splits[i]->end = "")
+                {
+                    char* temp = malloc(2*sizeof(char));
+                    temp[0] = alphabet[i];
+                    temp[1] = "/0";
+                    strarray[j*alphalen + i] = strcat(splits[i]->start, temp);
+                }
+                else
+                {
+                    char* temp = malloc(2*sizeof(char));
+                    temp[0] = alphabet[i];
+                    temp[1] = "/0";
+                    char* temp2 = strcat(temp,(splits[i]->end)++);
+                    strarray[j*alphalen + i] = strcat(splits[i]->start, temp2);
+                }
+            }
         }
     }
-
 }
 char** inserts(split* splits) {
     return NULL;
