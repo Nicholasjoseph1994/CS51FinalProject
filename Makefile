@@ -5,22 +5,19 @@ CC = clang
 # flags to pass compiler
 CFLAGS = -g -ggdb3 -O0 -Qunused-arguments -std=c99 -Wall -Werror
 
-# name for executable
-EXE = hashtable
+all: hashtable bloom trie autocorrect
 
-# space-separated list of header files
-HDRS = hashtable.h
-# HDRS = bloom.h hashtable.h
+hashtable: hashtable.o hashtable.h Makefile
+	$(CC) $(CFLAGS) -o $@ hashtable.o
 
-# space-separated list of source files
-SRCS = hashtable.c
-# SRCS = bloomtest.c bloom.c hashtable.c
+bloom: bloom.o bloomtest.o bloom.h Makefile
+	$(CC) $(CFLAGS) -o $@ bloom.o bloomtest.o
 
-# automatically generated list of object files
-OBJS = $(SRCS:.c=.o)
+trie: trie.o trie.h Makefile
+	$(CC) $(CFLAGS) -o $@ trie.o
 
-# default target
-
+autocorrect: autocorrectTrain.o autocorrectTrainTest.o autocorrectTrain.h Makefile
+	$(CC) $(CFLAGS) -o $@ autocorrectTrain.o autocorrectTrainTest.o
 # dependencies
 #$(OBJS): $(HDRS) Makefile
 
