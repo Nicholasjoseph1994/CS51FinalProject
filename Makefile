@@ -23,10 +23,10 @@ OBJS = $(SRCS:.c=.o)
 # default target
 all: hashtable bloom
 
-hashtable: hashtable.c hashtable.h Makefile
+hashtable: hashtable.o hashtable.h Makefile
 	$(CC) $(CFLAGS) -o $@ hashtable.o 
 
-bloom: bloom.c bloomtest.c bloom.h Makefile
+bloom: bloom.o bloomtest.o bloom.h Makefile
 	$(CC) $(CFLAGS) -o $@ bloom.o  bloomtest.o
 
 # dependencies
