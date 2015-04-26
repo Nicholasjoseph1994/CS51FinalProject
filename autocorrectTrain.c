@@ -96,7 +96,19 @@ char** replaces(split* splits, int splitslen) {
     }
 }
 char** inserts(split* splits) {
-    return NULL;
+    char* alphabet = "abcdefghijklmnopqrstuvwxyz";
+    int alphalen = strlen(alphabet);
+    char** strarray = malloc(splitslen * alphalen * sizeof(char*));
+    if (splits != NULL)
+    {
+        for (int i = 0; i < alphalen; i++)
+        {
+            for (int j = 0; j < splitslen; j++)
+            {
+                
+            }
+        }
+    }
 }
 char** editDistance1(char* word) {
     return NULL;
