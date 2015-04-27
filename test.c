@@ -46,28 +46,32 @@ char** transposes(split* splits) {
 
 char** replaces(split* splits) {
     if (splits == NULL) return NULL;
-    char* alphabet = "abcdefghijklmnopqrstuvwxyz";
+    char* alphabet = "abc";
     int alphalen = strlen(alphabet);
     int splitslen = strlen(splits[0].end) + 1;
-    char** strarray = malloc((splitslen - 1) * alphalen * sizeof(char*));
+    char** strarray = malloc((1 + (splitslen - 1) * alphalen) * sizeof(char*));
     for (int i = 0; i < splitslen - 1; i++)
     {
+        char* temp_start = malloc((strlen(splits[i].start)) * sizeof(char));
+        char* temp = malloc(2 * sizeof(char));
+        char* newend = malloc((strlen(temp) + strlen(splits[i].end) + 1) * sizeof(char));
         for (int j = 0; j < alphalen; j++)
         {
-            char* temp = malloc(2*sizeof(char));
+            strcpy(temp_start, splits[i].start);
+            printf("start = %s\n", temp_start);
             temp[0] = alphabet[j];
             temp[1] = '\0';
-            char* newend = malloc((strlen(temp) + strlen(splits[i].end) + 1) * sizeof(char));
-            newend = strcat(temp,(splits[i].end)++);
-            strarray[i*alphalen + j] = strcat(splits[i].start, newend);
+            strcpy(newend, strcat(temp,(splits[i].end) + 1));
+            strarray[i * alphalen + j] = strcat(temp_start, newend);
+            printf("newend = %s\n", newend);
         }
     }  
     return strarray;
 }
 
 char** inserts(split* splits) {
-    if (splits != NULL) return NULL;
-    char* alphabet = "abcdefghijklmnopqrstuvwxyz";
+    if (splits == NULL) return NULL;
+    char* alphabet = "aeiou";
     int alphalen = strlen(alphabet);
     int splitslen = strlen(splits[0].end) + 1;
     char** strarray = malloc(splitslen * alphalen * sizeof(char*));
@@ -76,7 +80,7 @@ char** inserts(split* splits) {
         {
             for (int j = 0; j < alphalen; j++)
             {
-                char* temp = malloc(2*sizeof(char));
+                char* temp = malloc(2 * sizeof(char));
                 temp[0] = alphabet[j];
                 temp[1] = '\0';
                 char* newend = malloc((strlen(temp) + strlen(splits[i].end) + 1) * sizeof(char));
@@ -107,10 +111,15 @@ int main(void)
     //     printf("%s\n", deletes_test[i]);
     
     // 'test' the transposes function
-    printf("\n========== TESTING TRANSPOSES FUNCTION ==========\n");
-    char** transposes_test = transposes(splits_test);
-    for (int i = 0; i < 4; i++)
-        printf("%s\n", transposes_test[i]);
+    // printf("\n========== TESTING TRANSPOSES FUNCTION ==========\n");
+    // char** transposes_test = transposes(splits_test);
+    // for (int i = 0; i < 4; i++)
+    //    printf("%s\n", transposes_test[i]);
+
+        printf("\n========== TESTING REPLACES FUNCTION ==========\n");
+    char** replaces_test = replaces(splits_test);
+    for (int i = 0; i < 15; i++)
+        printf("%s\n", replaces_test[i]);
 
     return 0;
 }
