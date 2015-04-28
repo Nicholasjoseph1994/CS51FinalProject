@@ -1,5 +1,4 @@
 #include "autocorrectTrain.h"
-#include "bloom.h"
 #include "string.h"
 hash_table* readWords(char** words, int numWords) {
     hash_table* table = create(HASHSIZE);
