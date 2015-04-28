@@ -68,6 +68,8 @@ char** replaces(split* splits) {
     }  
     return strarray;
 }
+// the function about is replace so example aable bable cable table tbble tcble ...
+// example atable btable ctable taable tbable tcable ...
 
 char** inserts(split* splits) {
     if (splits == NULL) return NULL;
@@ -92,7 +94,7 @@ char** inserts(split* splits) {
                 
                 strcpy(newend, strcat(temp,(splits[i].end))); //newend = strcat(temp, splits[i].end);
 
-                strarray[i*alphalen + j] = strcat(splits[i].start, newend);
+                strarray[i * alphalen + j] = strcat(temp_start, newend);
 
                 printf("newend = %s\n", newend); //new
             }
@@ -132,7 +134,7 @@ int main(void)
 
     printf("\n========== TESTING INSERTS FUNCTION ==========\n");
     char** inserts_test = inserts(splits_test);
-    for (int i = 0; i < 15; i++)
+    for (int i = 0; i < 18; i++)
         printf("%s\n", inserts_test[i]);
 
     return 0;
