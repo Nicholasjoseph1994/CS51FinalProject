@@ -83,20 +83,15 @@ char** inserts(split* splits) {
             for (int j = 0; j < alphalen; j++)
             {
                 char* temp = malloc(2 * sizeof(char));
-
-                char* temp_start = malloc((strlen(splits[i].start)) * sizeof(char)); //new
+                char* temp_start = malloc((strlen(splits[i].start)) * sizeof(char)); 
                 strcpy(temp_start, splits[i].start);
                 printf("start = %s\n", temp_start);
-
                 temp[0] = alphabet[j];
                 temp[1] = '\0';
-                char* newend = malloc((strlen(temp) + strlen(splits[i].end) + 1) * sizeof(char));
-                
-                strcpy(newend, strcat(temp,(splits[i].end))); //newend = strcat(temp, splits[i].end);
-
+                char* newend = malloc((strlen(temp) + strlen(splits[i].end) + 1) * sizeof(char)); 
+                strcpy(newend, strcat(temp,(splits[i].end))); 
                 strarray[i * alphalen + j] = strcat(temp_start, newend);
-
-                printf("newend = %s\n", newend); //new
+                printf("newend = %s\n", newend); 
             }
         }
     }

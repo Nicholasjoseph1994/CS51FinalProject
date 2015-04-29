@@ -117,9 +117,9 @@ char** deletes(split** splits, int splitslen) {
 //         }
 //     }
 // }
-// char** editDistance1(char* word) {
-//     return NULL;
-// }
-// char* correct (char* word) {
-//     return NULL;
-// }
+char** editDistance1(char* word) {
+    return set(deletes + transposes + replaces + inserts);
+}
+char* correct (char* word) {
+    return NULL;
+}
