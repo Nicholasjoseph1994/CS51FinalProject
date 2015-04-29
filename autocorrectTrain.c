@@ -5,6 +5,7 @@ hash_table* readWords(char** words, int numWords) {
     for (int i = 0; i < numWords; ++i) {
         add_word(words[i], table);
     }
+    return table;
 }
 typedef struct split {
     char* start;
@@ -14,32 +15,35 @@ typedef struct split {
 // char* testword = (char *) malloc(6 * sizeof(char));
 // strncpy(testword, "table", 5);
 
-split* splits (char* word) {
+split** splits (char* word) {
     int len = strlen(word);
-    split* splits [len];
+    split** splits = malloc(sizeof(split**) * len);
     for (int i = 0; i < len; i++) {
         split* s = malloc(sizeof(split));
         strncpy(s->start, word, i);
         strncpy(s->end, word + i, len-i);
         splits[i] = s;
     }
+    return splits;
 }
 /* I did splits but if you can fill these in that would be awesome */
 
 // for each split in splits, if the end part of the split is unempty, removes
 // the first letter, appends the new end to start, and returs the resulting string
-char** deletes(split* splits, int splitslen) {
+char** deletes(split** splits, int splitslen) {
     if (splits != NULL) 
     {
         char** strarray = malloc((splitslen-1)*sizeof(char*));
         for (int i = 0; i < splitslen; i++)
         {
-            if (strlen(splits[i].end) != 0) 
+            if (strlen(splits[i]->end) != 0) 
             {
-                strarray[i] = strcat(splits[i].start, splits[i].end+1);
+                strarray[i] = strcat(splits[i]->start, splits[i]->end+1);
             }
         }
+        return strarray;
     }     
+    return NULL;
 }
 
 // char** transposes(split* splits, int splitslen) {
