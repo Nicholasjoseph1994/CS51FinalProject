@@ -1,10 +1,8 @@
 #include "autocorrectTrain.h"
-int main(void) {
- 
-hash_table* training(void)= 
-{
+hash_table* training (void) {
     char* words[4] = {"this", "is", "2nd", "test"};
-    readWords(words, 4);
+    return readWords(words, 4);
+    
 }
-return;
+int main(void) {
 }
