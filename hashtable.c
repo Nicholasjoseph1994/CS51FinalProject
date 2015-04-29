@@ -11,23 +11,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void print_test(hash_table* mydict);
-
-int main(void)
-{
-    hash_table* mydict = create(HASHSIZE);
-    add_word("first", mydict);
-    add_word("second", mydict);
-    add_word("first", mydict); 
-    print_test(mydict);
-    bool x = check("first", mydict);
-    printf(x ? "yes":"no");
-    bool y = check("foo", mydict);
-    printf(y ? "yes" : "no");
- 
-}
-
-void print_test(hash_table* mydict)
+void print(hash_table* mydict)
 {
     for (int i = 0; i < (HASHSIZE - 1); i++)
     {

@@ -18,6 +18,10 @@ typedef struct hash_table
     hash_elt** lists;
     int buckets;
 } hash_table;
+
+// prints out a hashtable
+void print(hash_table* mydict);
+
 // creates a dictionary
 hash_table* create(int buckets);
 
