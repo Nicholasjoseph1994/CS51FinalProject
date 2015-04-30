@@ -1,13 +1,15 @@
 #include "autocorrectTrain.c"
+#include <string.h>
+
 #include <ctype.h>
 
 // changes txt file to list of strings, removes punctuation, makes lowercase
 char** filetostrs (const char* filename, int numwords) {
 	FILE* fp = fopen(filename, "r");
 	if (fp == NULL) return NULL;
-	char* currentword = malloc(100 * sizeof(char));
-	fgets(currentword, 100, fp);
-	char** strlist = malloc(numwords*100*sizeof(char));
+	char* currentword = malloc(MAXSTRLEN * sizeof(char));
+	fgets(currentword, MAXSTRLEN, fp);
+	char** strlist = malloc(numwords * MAXSTRLEN * sizeof(char));
 	int index = 0;
 	while (currentword != NULL)
 	{
@@ -20,14 +22,14 @@ char** filetostrs (const char* filename, int numwords) {
 				char* firsthalf = malloc(i*sizeof(char));
 				char* secondhalf = malloc((wordlen -i) * sizeof(char));
 				strncpy(firsthalf, currentword, i-1);
-				strncpy(secondhalf, currentword+(i+1), wordlen - i - 1);
+				strncpy(secondhalf, currentword + (i + 1), wordlen - i - 1);
 				currentword = strcat(firsthalf, secondhalf);
 				wordlen--;
 			}
 		}
 		strlist[index] = currentword;
 		index++;
-		fgets(currentword, 100, fp);
+		fgets(currentword, MAXSTRLEN, fp);
 	}
 	fclose(fp);
 	return strlist;
@@ -35,12 +37,34 @@ char** filetostrs (const char* filename, int numwords) {
 
 // takes a list of incorrectly spelled words and corrects them, outputting 
 // a list of corrected words
-char** correctFile (char** incorrect) {
-	return NULL;
+char** correctWords (char** incorrect, int numWords, hash_table* dict) {
+    char** corrects = malloc(MAXSTRLEN * numWords);
+
+    for (int i = 0; i < numWords; i++) {
+        corrects[i] = correct(incorrect[i], dict);
+    }
+    return corrects;
 }
 
 // compares the corrected list of words to the list of incorrected words, returns
 // integer number of disagreements
-int compareFiles (char** correct, char** incorrect) {
-	return 0;
+int compareFiles (char** correct, int numWords, char** incorrect) {
+
+    int errors = 0;
+    for (int i = 0; i < numWords; i++) {
+
+        if (!strcmp(correct[i], incorrect[i])) 
+            errors++;
+        
+    }
+    return errors;
+}
+
+int main (void)
+{
+	//TESTING FILETOSTRS
+	char** filetostrstest = filetostrs("cattleTest.txt", 5624);
+	for (int i = 0; i < 5624; i++)
+        printf("%s\n", filetostrstest[i]);
+
 }
