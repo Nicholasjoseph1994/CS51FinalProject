@@ -117,22 +117,18 @@ hash_table* editDistance1(char* word) {
 
     for (int i = 0; i < wordLen; i++) {
         add_word(deleted[i], table);
-        free(deleted[i]);
     }
 
     for (int i = 0; i < wordLen -1; i++) {
         add_word(transposed[i], table);
-        free(transposed[i]);
     }
 
     for (int i = 0; i < (wordLen * alphaLen); i++) {
         add_word(replaced[i], table);
-        free(replaced[i]);
     }
 
     for (int i = 0; i < ((wordLen + 1) * alphaLen); i++) {
         add_word(inserted[i], table);
-        free(inserted[i]);
     }
     free(deleted);
     free(transposed);
@@ -142,8 +138,8 @@ hash_table* editDistance1(char* word) {
 }
 
 hash_table* editDistance2(char* word, hash_table* dictionary) {
-
     hash_table* edits1 = editDistance1(word);
+    printf("got here\n");
     
     hash_table* edits2 = create(HASHSIZE);
 
@@ -197,20 +193,25 @@ char* correct (char* word, hash_table* dict) {
     hash_table* candidates = NULL;
 
     if (check(word, dict)) {
+        printf("returning first\n");
         return word;
     }
-        
-    candidates = known(editDistance1(word), dict); 
+    hash_table* eDistance = editDistance1(word);
+    candidates = known(eDistance, dict); 
     if (is_empty(candidates)) 
     {
-        free(candidates);
+        printf("about to free 207\n");
+        freeHash(candidates);
+        printf("freed 209\n");
         candidates = editDistance2(word, dict);
+        printf("freed 211\n");
         if (is_empty(candidates)) {
-            free(candidates);
+            printf("returning second\n");
+            freeHash(candidates);
             return word;
         }
     }
-
+    printf("got to 214\n");
     int freqmax = 0;
     int freq = 0;
     char* correction;
@@ -228,6 +229,7 @@ char* correct (char* word, hash_table* dict) {
             currentword = currentword -> next;
         }
     }
-    free(candidates);
+    printf("returning third\n");
+    freeHash(candidates);
     return correction;
 }
