@@ -18,6 +18,9 @@ trie: trie.o trie.h Makefile
 
 autocorrect: hashtable.o autocorrectTrain.o autocorrectTrainTest.o autocorrectTrain.h Makefile
 	$(CC) $(CFLAGS) -o $@ hashtable.o autocorrectTrain.o autocorrectTrainTest.o
+
+readinfile: hashtable.o autocorrectTrain.o readinfile.o autocorrectTrain.h Makefile
+	$(CC) $(CFLAGS) -o $@ hashtable.o autocorrectTrain.o readinfile.o
 # dependencies
 
 # housekeeping

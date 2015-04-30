@@ -1,6 +1,5 @@
-#include "autocorrectTrain.c"
+#include "autocorrectTrain.h"
 #include <string.h>
-
 #include <ctype.h>
 
 // changes txt file to list of strings, removes punctuation, makes lowercase
