@@ -19,10 +19,11 @@ char** filetostrs (const char* filename, int numwords) {
 			if (!(isalpha(currentword[i])))
 			{
 				char* firsthalf = malloc(i*sizeof(char));
-				char* secondhalf = malloc((wordlen -i) * sizeof(char));
+				char* secondhalf = malloc((wordlen - i + 1) * sizeof(char));
 				strncpy(firsthalf, currentword, i-1);
-				strncpy(secondhalf, currentword + (i + 1), wordlen - i - 1);
+				strncpy(secondhalf, currentword + (i + 1), wordlen - i);
 				currentword = strcat(firsthalf, secondhalf);
+				printf("%s\n", currentword);
 				wordlen--;
 			}
 		}
