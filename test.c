@@ -46,28 +46,34 @@ char** transposes(split* splits) {
 
 char** replaces(split* splits) {
     if (splits == NULL) return NULL;
-    char* alphabet = "abcdefghijklmnopqrstuvwxyz";
+    char* alphabet = "abc";
     int alphalen = strlen(alphabet);
     int splitslen = strlen(splits[0].end) + 1;
-    char** strarray = malloc((splitslen - 1) * alphalen * sizeof(char*));
+    char** strarray = malloc((1 + (splitslen - 1) * alphalen) * sizeof(char*));
     for (int i = 0; i < splitslen - 1; i++)
     {
         for (int j = 0; j < alphalen; j++)
         {
-            char* temp = malloc(2*sizeof(char));
+            char* temp = malloc(2 * sizeof(char));
+            char* temp_start = malloc((strlen(splits[i].start)) * sizeof(char));
+            strcpy(temp_start, splits[i].start);
+            printf("start = %s\n", temp_start);
             temp[0] = alphabet[j];
             temp[1] = '\0';
             char* newend = malloc((strlen(temp) + strlen(splits[i].end) + 1) * sizeof(char));
-            newend = strcat(temp,(splits[i].end)++);
-            strarray[i*alphalen + j] = strcat(splits[i].start, newend);
+            strcpy(newend, strcat(temp,(splits[i].end) + 1));
+            strarray[i * alphalen + j] = strcat(temp_start, newend);
+            printf("newend = %s\n", newend);
         }
     }  
     return strarray;
 }
+// the function about is replace so example aable bable cable table tbble tcble ...
+// example atable btable ctable taable tbable tcable ...
 
 char** inserts(split* splits) {
-    if (splits != NULL) return NULL;
-    char* alphabet = "abcdefghijklmnopqrstuvwxyz";
+    if (splits == NULL) return NULL;
+    char* alphabet = "abc";
     int alphalen = strlen(alphabet);
     int splitslen = strlen(splits[0].end) + 1;
     char** strarray = malloc(splitslen * alphalen * sizeof(char*));
@@ -76,12 +82,16 @@ char** inserts(split* splits) {
         {
             for (int j = 0; j < alphalen; j++)
             {
-                char* temp = malloc(2*sizeof(char));
+                char* temp = malloc(2 * sizeof(char));
+                char* temp_start = malloc((strlen(splits[i].start)) * sizeof(char)); 
+                strcpy(temp_start, splits[i].start);
+                printf("start = %s\n", temp_start);
                 temp[0] = alphabet[j];
                 temp[1] = '\0';
-                char* newend = malloc((strlen(temp) + strlen(splits[i].end) + 1) * sizeof(char));
-                newend = strcat(temp, splits[i].end);
-                strarray[i*alphalen + j] = strcat(splits[i].start, newend);
+                char* newend = malloc((strlen(temp) + strlen(splits[i].end) + 1) * sizeof(char)); 
+                strcpy(newend, strcat(temp,(splits[i].end))); 
+                strarray[i * alphalen + j] = strcat(temp_start, newend);
+                printf("newend = %s\n", newend); 
             }
         }
     }
@@ -106,11 +116,29 @@ int main(void)
     // for (int i = 0; i < 5; i++)
     //     printf("%s\n", deletes_test[i]);
     
+<<<<<<< HEAD
     // // 'test' the transposes function
     // printf("\n========== TESTING TRANSPOSES FUNCTION ==========\n");
     // char** transposes_test = transposes(splits_test);
     // for (int i = 0; i < 4; i++)
     //     printf("%s\n", transposes_test[i]);
+=======
+    // 'test' the transposes function
+    // printf("\n========== TESTING TRANSPOSES FUNCTION ==========\n");
+    // char** transposes_test = transposes(splits_test);
+    // for (int i = 0; i < 4; i++)
+    //    printf("%s\n", transposes_test[i]);
+
+    // printf("\n========== TESTING REPLACES FUNCTION ==========\n");
+    // char** replaces_test = replaces(splits_test);
+    // for (int i = 0; i < 15; i++)
+    //     printf("%s\n", replaces_test[i]);
+
+    printf("\n========== TESTING INSERTS FUNCTION ==========\n");
+    char** inserts_test = inserts(splits_test);
+    for (int i = 0; i < 18; i++)
+        printf("%s\n", inserts_test[i]);
+>>>>>>> 021bab801977ad8fa01d50027e627f57f8d0d8fc
 
     return 0;
 }
