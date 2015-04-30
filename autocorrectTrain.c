@@ -12,12 +12,10 @@ typedef struct split {
     char* end;
 } split;
 
-// char* testword = (char *) malloc(6 * sizeof(char));
-// strncpy(testword, "table", 5);
-
 split** splits (char* word) {
     int len = strlen(word);
-    split** splits = malloc(sizeof(split**) * len);
+    // mallocs a list of splits
+    split** splits = malloc(sizeof(split*) * len);
     for (int i = 0; i < len; i++) {
         split* s = malloc(sizeof(split));
         strncpy(s->start, word, i);
@@ -26,99 +24,72 @@ split** splits (char* word) {
     }
     return splits;
 }
-/* I did splits but if you can fill these in that would be awesome */
-
-// for each split in splits, if the end part of the split is unempty, removes
-// the first letter, appends the new end to start, and returs the resulting string
-char** deletes(split** splits, int splitslen) {
-    if (splits != NULL) 
-    {
-        char** strarray = malloc((splitslen-1)*sizeof(char*));
-        for (int i = 0; i < splitslen; i++)
-        {
-            if (strlen(splits[i]->end) != 0) 
-            {
-                strarray[i] = strcat(splits[i]->start, splits[i]->end+1);
-            }
+char** deletes(split** splits) {
+    if (splits == NULL) {
+        return NULL;
+    }
+    int wordLen = strlen(splits[0]->end);
+    char** deletes = malloc(wordLen * sizeof(char*));
+    for (int i = 0; i < wordLen; i++) {
+        char* delete = malloc(wordLen);
+        strcpy(delete, splits[i]->start);
+        deletes[i] = strcat(delete, splits[i]->end + 1);
+    }
+    return deletes;
+}
+char** transposes(split** splits) {
+    if (splits == NULL) {
+        return NULL;
+    }
+    int wordLen = strlen(splits[0]->end);
+    char** transposes = malloc((wordLen - 1) * sizeof(char*));
+    for (int i = 0; i < wordLen - 1; i++) {
+        char swapped [3] = {splits[i]->end[1], splits[i]->end[0], '\0'};
+        char* transpose = malloc(wordLen + 1);
+        strcpy(transpose, splits[i]->start);
+        transposes[i] = strcat(strcat(transpose, swapped), splits[i]->end + 2);
+    }
+    return transposes;
+}
+char** replaces(split** splits, char* alphabet) {
+    if (splits == NULL || alphabet == NULL) {
+        return NULL;
+    }
+    int alphaLen = strlen(alphabet);
+    int wordLen = strlen(splits[0]->end);
+    char** replaces = malloc(wordLen * alphaLen * sizeof(char*));
+    for (int i = 0; i < wordLen; i++) {
+        for (int j = 0; j < alphaLen; j++) {
+            char* replace = malloc(wordLen + 1);
+            strcpy(replace, splits[i]->start);
+            char replacement [2] = {alphabet[j], '\0'};
+            replaces[i] = strcat(strcat(replace, replacement), splits[i]->end + 1);
         }
-        return strarray;
-    }     
-    return NULL;
+    }
+    return replaces;
 }
 
-// char** transposes(split* splits, int splitslen) {
-//     if (splits != NULL)
-//     {
-//         char** strarray = malloc(splitslen * sizeof(char*));
-//         for (int i = 0; i < splitslen; i++)
-//         {
-//             if (strlen(splits[i]->end) == 0)
-//             {
-//                 strarray[i] = strcat(splits[i]->start, "")
-//             }
-//             else
-//             {
-//                 char* temp = malloc(3 * sizeof(char));
-//                 temp [0] = (splits[i] -> end) [1];
-//                 temp [1] = (splits[i] -> end) [0];
-//                 temp [2] = '/0';
-//                 char* newend = strcat(temp, ((splits[i]->end)++)++);
-//                 strarray[i] = strcat(splits[i]->start, newend);
-//             }
-//         }
-//     }
-// }
-// char** replaces(split* splits, int splitslen) {
-//     char* alphabet = "abcdefghijklmnopqrstuvwxyz";
-//     int alphalen = strlen(alphabet);
-//     char** strarray = malloc(splitslen * alphalen * sizeof(char*));
-//     if (splits != NULL)
-//     {
-//         for (int i = 0; i < splitslen; i++)
-//         {
-//             for (int j = 0; j < alphalen; j++)
-//             {
-//                 if (strlen(splits[i]->end )= 0)
-//                 {
-//                     char* temp = malloc(2*sizeof(char));
-//                     temp[0] = alphabet[j];
-//                     temp[1] = "/0";
-//                     strarray[i*alphalen + j] = strcat(splits[i]->start, temp);
-//                 }
-//                 else
-//                 {
-//                     char* temp = malloc(2*sizeof(char));
-//                     temp[0] = alphabet[j];
-//                     temp[1] = "/0";
-//                     char* temp2 = strcat(temp,(splits[i]->end)++);
-//                     strarray[i*alphalen + j] = strcat(splits[i]->start, temp2);
-//                 }
-//             }
-//         }
-//     }
-// }
-// char** inserts(split* splits) {
-//     char* alphabet = "abcdefghijklmnopqrstuvwxyz";
-//     int alphalen = strlen(alphabet);
-//     char** strarray = malloc(splitslen * alphalen * sizeof(char*));
-//     if (splits != NULL)
-//     {
-//         for (int i = 0; i < splitslen; i++)
-//         {
-//             for (int j = 0; j < alphalen; j++)
-//             {
-//                 char* temp = malloc(2*sizeof(char));
-//                 temp[0] = alphabet[j];
-//                 temp[1] = "/0";
-//                 char* temp2 = malloc((strlen(temp) + strlen(splits[i]->end) + 1) * sizeof(char));
-//                 temp2 = strcat(temp, splits[i]->end);
-//                 strarray[i*alphalen + j] = strcat(splits[i]->start, temp2);
-//             }
-//         }
-//     }
-// }
-char** editDistance1(char* word) {
-    return NULL;
+char** inserts(split** splits, char* alphabet) {
+    if (splits == NULL || alphabet == NULL) {
+        return NULL;
+    }
+    int alphaLen = strlen(alphabet);
+    int wordLen = strlen(splits[0]->end);
+    char** inserts = malloc(wordLen * alphaLen * sizeof(char*));
+    for (int i = 0; i < wordLen; i++) {
+        for (int j = 0; j < alphaLen; j++) {
+            char* insert = malloc(wordLen + 1);
+            strcpy(insert, splits[i]->start);
+            char insertion [2] = {alphabet[j], '\0'};
+            inserts[i] = strcat(strcat(insert, insertion), splits[i]->end);
+        }
+    }
+    return inserts;
+}
+
+hash_table* editDistance1(char* word) {
+    hash_table* table = create(HASHSIZE);
+
 }
 char* correct (char* word) {
     return NULL;

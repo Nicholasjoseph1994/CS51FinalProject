@@ -6,7 +6,7 @@
  */
 hash_table* readWords(char** words, int numWords);
 // gives all the words that are edit distance 1 away
-char** editDistance1(char* word);
+hash_table* editDistance1(char* word);
 // gives all the words that are edit distance 2 away
 char** editDistance2(char* word);
 // returns a subset of words that are valid words in our dictionary
