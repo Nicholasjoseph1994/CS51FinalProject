@@ -87,35 +87,67 @@ char** inserts(split** splits, char* alphabet) {
     return inserts;
 }
 
-void editDistance1(char* word, hash_table* table) {
+//make sure to create the hashtable outside of this function
+hash_table* editDistance1(char* word, hash_table* table) {
     char* alphabet = "abcdefghijklmnopqrstuvwxyz";
-    split** splits = splits(word);
-    char** deletes = deletes(word);
-    char** transposes = transposes(word);
-    char** replaces = replaces(word, alphabet);
-    char** inserts = inserts(word, alphabet);
+    split** the_splits = splits(word);
+    char** deleted = deletes(the_splits);
+    char** transposed = transposes(the_splits);
+    char** replaced = replaces(the_splits, alphabet);
+    char** inserted = inserts(the_splits, alphabet);
 
     int wordLen = strlen(word);
     int alphaLen = strlen(alphabet);
 
     for (int i = 0; i < wordLen; i++) {
-        add_word(deletes[i], table);
+        add_word(deleted[i], table);
     }
 
     for (int i = 0; i < wordLen -1; i++) {
-        add_word(transposes[i], table);
+        add_word(transposed[i], table);
     }
 
     for (int i = 0; i < (wordLen * alphaLen); i++) {
-        add_word(replaces[i], table);
+        add_word(replaced[i], table);
     }
 
     for (int i = 0; i < (wordLen * alphaLen); i++) {
-        add_word(inserts[i], table);
+        add_word(inserted[i], table);
     }
+    return table;
 }
 
-hash_table* editDistance2(char* word) {
+hash_table* editDistance2(char* word, hash_table* dictionary) {
+    hash_table* new_table = create(HASHSIZE);
+
+    hash_table* edits1 = editDistance1(word, new_table);
+    
+    hash_table* edits2 = create(HASHSIZE);
+
+    for (int i = 0; i < edits1->buckets; i++) {
+        hash_elt* elt = edits1->lists[i];
+        while (elt != NULL)
+        {
+            hash_table* two_table = create(HASHSIZE);
+            hash_table* two_away = editDistance1(elt->word, two_table);
+
+            for (int j = 0; j < two_away->buckets; j++) {
+                hash_elt* elt2 = two_away->lists[j];
+                
+                while (elt2 != NULL) {
+
+                    if (check(elt2->word, dictionary)) {
+                        add_word(elt2->word, edits2);
+                    }
+                    elt2 = elt2->next;
+
+                }
+            }
+            elt = elt->next;
+        }
+    }
+    return edits2;
+}
 
 char* correct (char* word) {
     return NULL;
