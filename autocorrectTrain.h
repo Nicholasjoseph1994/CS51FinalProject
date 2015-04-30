@@ -5,6 +5,19 @@
  * numWords - the length of words
  */
 hash_table* readWords(char** words, int numWords);
+
+typedef struct split {
+    char* start;
+    char* end;
+} split;
+
+split** splits (char* word);
+char** deletes(split** splits);
+char** transposes(split** splits);
+char** replaces(split** splits, char* alphabet);
+char** inserts(split** splits, char* alphabet);
+
+
 // gives all the words that are edit distance 1 away
 hash_table* editDistance1(char* word, hash_table* table);
 // gives all the words that are edit distance 2 away
