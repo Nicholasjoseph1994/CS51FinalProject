@@ -35,10 +35,17 @@ char** deletes(split** splits) {
         return NULL;
     }
     int wordLen = strlen(splits[0]->end);
+    printf("the wordLen is %d \n", wordLen);
     char** deletes = malloc(wordLen * sizeof(char*));
+    printf("mallocd deletes \n");
     for (int i = 0; i < wordLen; i++) {
         char* delete = malloc(wordLen);
+        printf("about to print delete splits"); 
+        printf("%s \n", splits[i]->start);
         strcpy(delete, splits[i]->start);
+        printf("finished strcpy \n");
+        printf("%s \n", splits[i]->end + 1);
+        printf("%s \n", splits[i]->end);
         deletes[i] = strcat(delete, splits[i]->end + 1);
     }
     return deletes;
@@ -103,14 +110,23 @@ char** inserts(split** splits, char* alphabet) {
 
 //make sure to create the hashtable outside of this function
 hash_table* editDistance1(char* word) {
+    printf("entered ed1 \n");
     hash_table* table = create(HASHSIZE);
+    printf("created tbl \n");
     char* alphabet = "abcdefghijklmnopqrstuvwxyz";
     split** the_splits = splits(word);
+    printf("the splits created \n");
     char** deleted = deletes(the_splits);
+    printf("deleted created \n");
     char** transposed = transposes(the_splits);
+    printf("transposed created \n");
     char** replaced = replaces(the_splits, alphabet);
+    printf("replaced created \n");
     char** inserted = inserts(the_splits, alphabet);
+    printf("inserted created \n");
     freeSplits(the_splits, strlen(word));
+
+    printf("splits freed \n");
 
     int wordLen = strlen(word);
     int alphaLen = strlen(alphabet);
@@ -195,14 +211,15 @@ hash_table* known (hash_table* words, hash_table* dict) {
 
 char* correct (char* word, hash_table* dict) {
     hash_table* candidates = NULL;
-    printf("in correct");
+    printf("in correct \n");
     if (check(word, dict)) {
-        printf("exit");
+        printf("exit \n");
         return word;
     }
         
-    printf("got here");
+    printf("before candidates \n");
     candidates = known(editDistance1(word), dict); 
+    printf("after candidates \n");
     if (is_empty(candidates)) 
     {
         free(candidates);
@@ -230,7 +247,7 @@ char* correct (char* word, hash_table* dict) {
             currentword = currentword -> next;
         }
     }
-    printf("exit");
+    printf("exit \n");
     free(candidates);
     return correction;
 }
