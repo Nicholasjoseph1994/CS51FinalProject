@@ -62,7 +62,7 @@ int getFrequency(char* word, hash_table* mytable)
     //printf(" %s ", test1->word);
     //struct hash_elt *element;
     for (hash_elt* element = mytable->lists[hash_value]; element != NULL; element = element->next)
-        if (strcasecmp(word, element->word) == 0)
+        if (strcmp(word, element->word) == 0)
             return element->freq; 
     return 0; 
 }
@@ -75,7 +75,7 @@ void add_word(char* word, hash_table* mytable)
     {
         for (hash_elt* element = mytable->lists[hash_value]; element!= NULL; element = element->next)
         {
-            if (strcasecmp(word,element->word) == 0)
+            if (strcmp(word,element->word) == 0)
             {
                 (element->freq)++;
                 return;
