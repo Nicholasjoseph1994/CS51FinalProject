@@ -25,5 +25,5 @@ hash_table* editDistance2(char* word, hash_table* dictionary);
 // returns a subset of words that are valid words in our dictionary
 char** valid_words(hash_table* table, char**words); 
 // gives a valid word that is a possible correction
-char* correct(char* word);
+char* correct(char* word, hash_table* dict);
 

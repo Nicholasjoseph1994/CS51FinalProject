@@ -34,4 +34,5 @@ int getFrequency(char* word, hash_table* mytable);
 // adds a word to the hashtable
 void add_word(char* word, hash_table* mytable);
 
+bool is_empty(hash_table* table);
 

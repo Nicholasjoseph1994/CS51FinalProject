@@ -95,3 +95,11 @@ void add_word(char* word, hash_table* mytable)
     return;
 }
 
+bool is_empty(hash_table* table) {
+    for (int i = 0; i < table->buckets; i++) {
+        if (table->lists[i] != NULL) {
+            return false;
+        }
+    }
+    return true;
+}

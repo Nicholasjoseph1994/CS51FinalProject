@@ -73,7 +73,7 @@ char** inserts(split** splits, char* alphabet) {
     }
     int alphaLen = strlen(alphabet);
     int wordLen = strlen(splits[0]->end);
-    char** inserts = malloc(wordLen * alphaLen * sizeof(char*));
+    char** inserts = malloc((wordLen+1) * alphaLen * sizeof(char*));
     for (int i = 0; i < wordLen; i++) {
         for (int j = 0; j < alphaLen; j++) {
             char* insert = malloc(wordLen + 1);
@@ -86,8 +86,8 @@ char** inserts(split** splits, char* alphabet) {
     for (int j = 0; j < alphaLen; j++) {
         char* insert = malloc(wordLen + 1);
         char insertions[2] = {alphabet[j], '\0'};
-        strcpy(insert, insertions);
-        inserts[wordLen * alphaLen + j] = strcat(strcat(insert, splits[0]->start), splits[0]->end);
+        strcpy(insert, splits[0]->start);
+        inserts[wordLen * alphaLen + j] = strcat(strcat(insert, splits[0]->end), insertions);
 
     }
     return inserts;
@@ -155,8 +155,8 @@ hash_table* editDistance2(char* word, hash_table* dictionary) {
     return edits2;
 }
 
-hashtable* known (hashtable* words, hashtable* dict) {
-    hashtable* knownwords = create(HASHSIZE);
+hash_table* known (hash_table* words, hash_table* dict) {
+    hash_table* knownwords = create(HASHSIZE);
 
     for (int i = 0; i < words->buckets; i++)
     {
@@ -165,7 +165,7 @@ hashtable* known (hashtable* words, hashtable* dict) {
         {
             if(check(currentword->word, dict))
             {
-                addword(currentword->word, knownwords)
+                add_word(currentword->word, knownwords);
             }
             currentword = currentword->next;
         }
@@ -173,43 +173,36 @@ hashtable* known (hashtable* words, hashtable* dict) {
     return knownwords;
 }
 
-hashtable* union (hashtable* table1, hashtable* table2) {
-    for (int i = 0; i < table2->buckets; i++)
-    {
-        hast_elt* table2elt = table2
-        while (table2elt != NULL)
-        {
-            addword(table2elt, table1);
-        }
-        table2elt = table2elt->next;
-    }
-    return table1;
-}
-
-char* correct (char* word, hashtable* dict) {
-    hashtable* corrections = NULL;
+char* correct (char* word, hash_table* dict) {
+    hash_table* candidates = NULL;
 
     if (check(word, dict))  
         return word;
         
-    corrections = known(editDistance1(word, dict), dict); 
-    if is_empty(corrections) 
+    candidates = known(editDistance1(word, dict), dict); 
+    if (is_empty(candidates)) 
     {
-        corrections = editDistance2(word, dict);
-        if is_empty(corrections)
+        candidates = editDistance2(word, dict);
+        if (is_empty(candidates))
             return word;
     }
 
     int freqmax = 0;
-    for (int i = 0; i < len; i++)
+    int freq = 0;
+    char* correction;
+    for (int i = 0; i < candidates->buckets; i++)
     {
-        freq = probability of candidates[i];
-        if prob > probmax
+        hash_elt* currentword = candidates->lists[i];
+        while (currentword != NULL)
         {
-            probmax = prob;
-            correction = candidates[i];
+            freq = getFrequency(currentword->word, dict);
+            if (freq > freqmax)
+            {
+                freqmax = freq;
+                correction = currentword->word;
+            }
+            currentword = currentword -> next;
         }
     }
     return correction;
-
 }
