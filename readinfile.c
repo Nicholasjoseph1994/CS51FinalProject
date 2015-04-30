@@ -37,9 +37,10 @@ char** filetostrs (const char* filename, int numwords) {
 // takes a list of incorrectly spelled words and corrects them, outputting 
 // a list of corrected words
 char** correctWords (char** incorrect, int numWords, hash_table* dict) {
-    char** corrects = malloc(MAXSTRLEN * numWords);
+    char** corrects = malloc(numWords * sizeof(char*));
 
     for (int i = 0; i < numWords; i++) {
+        printf("%d\n", i);
         corrects[i] = correct(incorrect[i], dict);
     }
     return corrects;

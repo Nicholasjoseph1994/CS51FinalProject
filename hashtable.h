@@ -4,7 +4,7 @@
 #include <strings.h>
 #include <stdbool.h>
 
-#define HASHSIZE 1000
+#define HASHSIZE 100000
 
 typedef struct hash_elt
 {

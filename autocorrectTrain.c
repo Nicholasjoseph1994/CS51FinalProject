@@ -24,6 +24,12 @@ split** splits (char* word) {
     }
     return splits;
 }
+void freeSplits(split** splits, int numSplits) {
+    for (int i = 0; i < numSplits; i++) {
+        free(splits[i]);
+    }
+    free(splits);
+}
 char** deletes(split** splits) {
     if (splits == NULL) {
         return NULL;
@@ -104,25 +110,34 @@ hash_table* editDistance1(char* word) {
     char** transposed = transposes(the_splits);
     char** replaced = replaces(the_splits, alphabet);
     char** inserted = inserts(the_splits, alphabet);
+    freeSplits(the_splits, strlen(word));
 
     int wordLen = strlen(word);
     int alphaLen = strlen(alphabet);
 
     for (int i = 0; i < wordLen; i++) {
         add_word(deleted[i], table);
+        free(deleted[i]);
     }
 
     for (int i = 0; i < wordLen -1; i++) {
         add_word(transposed[i], table);
+        free(transposed[i]);
     }
 
     for (int i = 0; i < (wordLen * alphaLen); i++) {
         add_word(replaced[i], table);
+        free(replaced[i]);
     }
 
     for (int i = 0; i < ((wordLen + 1) * alphaLen); i++) {
         add_word(inserted[i], table);
+        free(inserted[i]);
     }
+    free(deleted);
+    free(transposed);
+    free(replaced);
+    free(inserted);
     return table;
 }
 
