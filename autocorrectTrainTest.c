@@ -67,7 +67,26 @@ int main(void) {
     assert(strcmp(inserts_test[15], "tablea") == 0);
     assert(strcmp(inserts_test[16], "tableb") == 0);
     assert(strcmp(inserts_test[17], "tablec") == 0);
-    printf("Passed all tests\n");
 
+    // test inserts in editDistance1
+    hash_table* test = editDistance1("table");
+    for (int i = 0; i < 5; i++) {
+        assert(check(deletes_test[i], test));
+    }
+    for (int i = 0; i < 4; i++) {
+        assert(check(transposes_test[i], test));
+    }
+    for (int i = 0; i < 15; i++) {
+        assert(check(replaces_test[i], test));
+    }
+    for (int i = 0; i < 18; i++) {
+        assert(check(inserts_test[i], test));
+    }
+
+    char* dictWords [3] = {"table", "cow", "moo"};
+    hash_table* testDict = readWords(dictWords, 3);
+    assert(strcmp(correct("atble", testDict), "table") == 0);
+
+    printf("Passed all tests\n");
     return 0;
 }

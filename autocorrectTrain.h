@@ -19,7 +19,7 @@ char** inserts(split** splits, char* alphabet);
 
 
 // gives all the words that are edit distance 1 away
-hash_table* editDistance1(char* word, hash_table* table);
+hash_table* editDistance1(char* word);
 // gives all the words that are edit distance 2 away
 hash_table* editDistance2(char* word, hash_table* dictionary);
 // returns a subset of words that are valid words in our dictionary
