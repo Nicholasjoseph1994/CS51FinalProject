@@ -1,5 +1,8 @@
 #include "autocorrectTrain.h"
 #include "string.h"
+
+#define MAXSTRLEN 100
+
 hash_table* readWords(char** words, int numWords) {
     hash_table* table = create(HASHSIZE);
     for (int i = 0; i < numWords; ++i) {
