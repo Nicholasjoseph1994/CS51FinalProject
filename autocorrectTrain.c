@@ -167,9 +167,11 @@ hash_table* editDistance2(char* word, hash_table* dictionary) {
                     elt2 = elt2->next;
                 }
             }
+            freeHash(two_away);
             elt = elt->next;
         }
     }
+    freeHash(edits1);
     return edits2;
 }
 
@@ -201,8 +203,10 @@ char* correct (char* word, hash_table* dict) {
     candidates = known(editDistance1(word), dict); 
     if (is_empty(candidates)) 
     {
+        free(candidates);
         candidates = editDistance2(word, dict);
         if (is_empty(candidates)) {
+            free(candidates);
             return word;
         }
     }
@@ -224,5 +228,6 @@ char* correct (char* word, hash_table* dict) {
             currentword = currentword -> next;
         }
     }
+    free(candidates);
     return correction;
 }

@@ -106,10 +106,10 @@ void freeHash(hash_table* table) {
 
     for (int i = 0; i < (HASHSIZE); i++)
     {
-        hash_elt* element = mydict->lists[i];
+        hash_elt* element = table->lists[i];
         while (element != NULL)
         {
-            hash_table* temp = element->next;
+            hash_elt* temp = element->next;
             free(element);
             element = temp;
         }
