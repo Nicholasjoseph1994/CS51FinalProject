@@ -63,6 +63,6 @@ int main (void)
 {
 	//TESTING FILETOSTRS
 	char** noErrors = filetostrs("cattleTest.txt", 5676);
-    char** errors = filetostrs("cattleTestErrors.txt", 5676
+    char** errors = filetostrs("cattleTestIncorrect.txt", 5676);
 
 }
