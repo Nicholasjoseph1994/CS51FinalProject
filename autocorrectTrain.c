@@ -92,10 +92,36 @@ char** inserts(split** splits, char* alphabet) {
     return inserts;
 }
 
-hash_table* editDistance1(char* word) {
-    return NULL;
+void editDistance1(char* word, hash_table* table) {
+    char* alphabet = "abcdefghijklmnopqrstuvwxyz";
+    split** splits = splits(word);
+    char** deletes = deletes(word);
+    char** transposes = transposes(word);
+    char** replaces = replaces(word, alphabet);
+    char** inserts = inserts(word, alphabet);
 
+    int wordLen = strlen(word);
+    int alphaLen = strlen(alphabet);
+
+    for (int i = 0; i < wordLen; i++) {
+        add_word(deletes[i], table);
+    }
+
+    for (int i = 0; i < wordLen -1; i++) {
+        add_word(transposes[i], table);
+    }
+
+    for (int i = 0; i < (wordLen * alphaLen); i++) {
+        add_word(replaces[i], table);
+    }
+
+    for (int i = 0; i < (wordLen * alphaLen); i++) {
+        add_word(inserts[i], table);
+    }
 }
+
+hash_table* editDistance2(char* word) {
+
 char* correct (char* word) {
     return NULL;
 }

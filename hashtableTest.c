@@ -1,4 +1,6 @@
 #include "hashtable.h"
+#include <assert.h>
+
 int main(void)
 {
     hash_table* mydict = create(HASHSIZE);
