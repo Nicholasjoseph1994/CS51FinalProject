@@ -1,6 +1,5 @@
 #include "autocorrectTrain.h"
 #include "string.h"
-#include "hashtable.h"
 hash_table* readWords(char** words, int numWords) {
     hash_table* table = create(HASHSIZE);
     for (int i = 0; i < numWords; ++i) {
@@ -94,7 +93,8 @@ char** inserts(split** splits, char* alphabet) {
 }
 
 //make sure to create the hashtable outside of this function
-hash_table* editDistance1(char* word, hash_table* table) {
+hash_table* editDistance1(char* word) {
+    hash_table* table = create(HASHSIZE);
     char* alphabet = "abcdefghijklmnopqrstuvwxyz";
     split** the_splits = splits(word);
     char** deleted = deletes(the_splits);
@@ -117,36 +117,36 @@ hash_table* editDistance1(char* word, hash_table* table) {
         add_word(replaced[i], table);
     }
 
-    for (int i = 0; i < (wordLen * alphaLen); i++) {
+    for (int i = 0; i < ((wordLen + 1) * alphaLen); i++) {
         add_word(inserted[i], table);
     }
     return table;
 }
 
 hash_table* editDistance2(char* word, hash_table* dictionary) {
-    hash_table* new_table = create(HASHSIZE);
 
-    hash_table* edits1 = editDistance1(word, new_table);
+    hash_table* edits1 = editDistance1(word);
     
     hash_table* edits2 = create(HASHSIZE);
 
+    // goes through all the words that are edit distance1
     for (int i = 0; i < edits1->buckets; i++) {
         hash_elt* elt = edits1->lists[i];
         while (elt != NULL)
         {
-            hash_table* two_table = create(HASHSIZE);
-            hash_table* two_away = editDistance1(elt->word, two_table);
+            // finds all the words that are edit distance 1 from each word
+            hash_table* two_away = editDistance1(elt->word);
 
+            // adds all of those words to edits2
             for (int j = 0; j < two_away->buckets; j++) {
                 hash_elt* elt2 = two_away->lists[j];
                 
                 while (elt2 != NULL) {
-
+                    // checks if the string is an actual word before adding
                     if (check(elt2->word, dictionary)) {
                         add_word(elt2->word, edits2);
                     }
                     elt2 = elt2->next;
-
                 }
             }
             elt = elt->next;
@@ -156,7 +156,7 @@ hash_table* editDistance2(char* word, hash_table* dictionary) {
 }
 
 hash_table* known (hash_table* words, hash_table* dict) {
-    hash_table* knownwords = create(HASHSIZE);
+    hash_table* knownWords = create(HASHSIZE);
 
     for (int i = 0; i < words->buckets; i++)
     {
@@ -165,26 +165,28 @@ hash_table* known (hash_table* words, hash_table* dict) {
         {
             if(check(currentword->word, dict))
             {
-                add_word(currentword->word, knownwords);
+                add_word(currentword->word, knownWords);
             }
             currentword = currentword->next;
         }
     }
-    return knownwords;
+    return knownWords;
 }
 
 char* correct (char* word, hash_table* dict) {
     hash_table* candidates = NULL;
 
-    if (check(word, dict))  
+    if (check(word, dict)) {
         return word;
+    }
         
-    candidates = known(editDistance1(word, dict), dict); 
+    candidates = known(editDistance1(word), dict); 
     if (is_empty(candidates)) 
     {
         candidates = editDistance2(word, dict);
-        if (is_empty(candidates))
+        if (is_empty(candidates)) {
             return word;
+        }
     }
 
     int freqmax = 0;
@@ -195,7 +197,7 @@ char* correct (char* word, hash_table* dict) {
         hash_elt* currentword = candidates->lists[i];
         while (currentword != NULL)
         {
-            freq = getFrequency(currentword->word, dict);
+            freq = getFrequency(currentword->word, dict) + 1;
             if (freq > freqmax)
             {
                 freqmax = freq;

@@ -87,11 +87,9 @@ void add_word(char* word, hash_table* mytable)
     if (new_elt == NULL)
         return;
     new_elt->word = word;
-    printf("word added by add_word: %s \n", word);
     new_elt->freq = 1;
     new_elt->next = mytable->lists[hash_value];
     mytable->lists[hash_value] = new_elt;
-    printf("dict value: %s \n", mytable->lists[hash_value]->word);
     return;
 }
 
