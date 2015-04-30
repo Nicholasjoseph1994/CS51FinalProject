@@ -1,4 +1,6 @@
 #include "autocorrectTrain.c"
+#include <string.h>
+
 
 // changes txt file to list of strings, removes punctuation, makes lowercase
 char** filetostrs (const char* filename, int numwords) {
@@ -32,12 +34,24 @@ char** filetostrs (const char* filename, int numwords) {
 
 // takes a list of incorrectly spelled words and corrects them, outputting 
 // a list of corrected words
-char** correctFile (char** incorrect) {
+char** correctWords (char** incorrect, int numWords, hash_table* dict) {
+    char** corrects = malloc(MAXSTRLEN * numWords);
 
+    for (int i = 0; i < numWords; i++) {
+        corrects[i] = correct(incorrect[i], dict);
+    }
 }
 
 // compares the corrected list of words to the list of incorrected words, returns
 // integer number of disagreements
-int compareFiles (char** correct, char** incorrect) {
+int compareFiles (char** correct, int numWords, char** incorrect) {
 
+    int errors = 0;
+    for (int i = 0; i < numWords; i++) {
+
+        if (!strcmp(correct[i], incorrect[i])) 
+            errors++;
+        
+    }
+    return errors;
 }
