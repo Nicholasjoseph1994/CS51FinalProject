@@ -114,4 +114,5 @@ void freeHash(hash_table* table) {
             element = temp;
         }
     }
+    free(table);
 }
