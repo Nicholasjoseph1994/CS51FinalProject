@@ -7,17 +7,14 @@ hash_table* readWords(char** words, int numWords) {
     }
     return table;
 }
-typedef struct split {
-    char* start;
-    char* end;
-} split;
-
 split** splits (char* word) {
     int len = strlen(word);
     // mallocs a list of splits
     split** splits = malloc(sizeof(split*) * len);
     for (int i = 0; i < len; i++) {
         split* s = malloc(sizeof(split));
+        s->start = malloc((i+1) * sizeof(char));
+        s->end = malloc((len - i + 1) * sizeof(char));
         strncpy(s->start, word, i);
         strncpy(s->end, word + i, len-i);
         splits[i] = s;
@@ -61,9 +58,9 @@ char** replaces(split** splits, char* alphabet) {
     for (int i = 0; i < wordLen; i++) {
         for (int j = 0; j < alphaLen; j++) {
             char* replace = malloc(wordLen + 1);
-            strcpy(replace, splits[i]->start);
             char replacement [2] = {alphabet[j], '\0'};
-            replaces[i] = strcat(strcat(replace, replacement), splits[i]->end + 1);
+            strcpy(replace, splits[i]->start);
+            replaces[i*alphaLen + j] = strcat(strcat(replace, replacement), splits[i]->end + 1);
         }
     }
     return replaces;
@@ -79,16 +76,24 @@ char** inserts(split** splits, char* alphabet) {
     for (int i = 0; i < wordLen; i++) {
         for (int j = 0; j < alphaLen; j++) {
             char* insert = malloc(wordLen + 1);
-            strcpy(insert, splits[i]->start);
             char insertion [2] = {alphabet[j], '\0'};
-            inserts[i] = strcat(strcat(insert, insertion), splits[i]->end);
+            strcpy(insert, splits[i]->start);
+            inserts[i*alphaLen+j] = strcat(strcat(insert, insertion), splits[i]->end);
         }
+    }
+    // deals with inserts on the end
+    for (int j = 0; j < alphaLen; j++) {
+        char* insert = malloc(wordLen + 1);
+        char insertions[2] = {alphabet[j], '\0'};
+        strcpy(insert, insertions);
+        inserts[wordLen * alphaLen + j] = strcat(strcat(insert, splits[0]->start), splits[0]->end);
+
     }
     return inserts;
 }
 
 hash_table* editDistance1(char* word) {
-    hash_table* table = create(HASHSIZE);
+    return NULL;
 
 }
 char* correct (char* word) {
