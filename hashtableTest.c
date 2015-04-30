@@ -3,14 +3,23 @@
 
 int main(void)
 {
+    //create a hash table
     hash_table* mydict = create(HASHSIZE);
+
+    //add first, first, First, fiRst, second to the dict
     add_word("first", mydict);
     add_word("second", mydict);
     add_word("first", mydict);
-    print(mydict);
-    bool x = check("first", mydict);
-    printf(x ? "yes":"no");
-    bool y = check("foo", mydict);
-    printf(y ? "yes" : "no");
+    add_word("first", mydict);
+
+    //test the check, getFrequency, and is_empty
+    assert(check("first", mydict));
+    assert(!check("not_member", mydict));
+    int freq = getFrequency("first", mydict);
+    assert(freq == 3);
+    assert(!is_empty(mydict));
+
+    hash_table* emptydict = create(HASHSIZE);
+    assert(is_empty(emptydict));
 
 }
