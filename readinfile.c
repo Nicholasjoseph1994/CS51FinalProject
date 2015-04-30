@@ -52,7 +52,7 @@ int compareFiles (char** correct, int numWords, char** incorrect) {
     int errors = 0;
     for (int i = 0; i < numWords; i++) {
 
-        if (!strcmp(correct[i], incorrect[i])) 
+        if (strcmp(correct[i], incorrect[i])!=0) 
             errors++;
         
     }
@@ -63,6 +63,16 @@ int main (void)
 {
 	//TESTING FILETOSTRS
 	char** noErrors = filetostrs("cattleTest.txt", 5676);
+    printf("here1\n");
     char** errors = filetostrs("cattleTestIncorrect.txt", 5676);
+    printf("here2\n");
+    char** lotsOfWords = filetostrs("bigFormatted.txt", 1095639);
+    printf("here3\n");
+    hash_table* dict = readWords(lotsOfWords, 1095639);
+    printf("here4\n");
+    char** correctedVersion = correctWords(errors, 5676, dict);
+    printf("here5\n");
+    int numberWrong = compareFiles(noErrors, 5676, correctedVersion);
+    printf(" the number we got wrong is %d\n", numberWrong);
 
 }
