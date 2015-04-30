@@ -8,10 +8,8 @@ char** filetostrs (const char* filename, int numwords) {
 	if (fp == NULL) return NULL;
 	char* currentword = malloc(MAXSTRLEN * sizeof(char));
 	fgets(currentword, MAXSTRLEN, fp);
-	char** strlist = malloc(numwords * MAXSTRLEN * sizeof(char));
-	int index = 0;
-	while (currentword != NULL)
-	{
+	char** strlist = malloc(numwords * sizeof(char*));
+    for (int index = 0; index < numwords; index++) {
 		int wordlen = strlen(currentword);
 		for (int i = 0; i < wordlen; i++)
 		{
@@ -20,15 +18,16 @@ char** filetostrs (const char* filename, int numwords) {
 			{
 				char* firsthalf = malloc(i*sizeof(char));
 				char* secondhalf = malloc((wordlen - i + 1) * sizeof(char));
-				strncpy(firsthalf, currentword, i-1);
-				strncpy(secondhalf, currentword + (i + 1), wordlen - i);
-				currentword = strcat(firsthalf, secondhalf);
-				printf("%s\n", currentword);
+				strncpy(firsthalf, currentword, i);
+				strncpy(secondhalf, currentword + i + 1, wordlen - i);
+                strcpy(currentword, firsthalf);
+				currentword = strcat(currentword, secondhalf);
 				wordlen--;
+                i--;
 			}
 		}
 		strlist[index] = currentword;
-		index++;
+        currentword = malloc(MAXSTRLEN * sizeof(char));
 		fgets(currentword, MAXSTRLEN, fp);
 	}
 	fclose(fp);
@@ -63,8 +62,7 @@ int compareFiles (char** correct, int numWords, char** incorrect) {
 int main (void)
 {
 	//TESTING FILETOSTRS
-	char** filetostrstest = filetostrs("cattleTest.txt", 5624);
-	for (int i = 0; i < 5624; i++)
-        printf("%s\n", filetostrstest[i]);
+	char** noErrors = filetostrs("cattleTest.txt", 5676);
+    char** errors = filetostrs("cattleTestErrors.txt", 5676
 
 }

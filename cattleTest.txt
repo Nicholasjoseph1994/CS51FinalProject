@@ -300,7 +300,8 @@ Lulu
 breed,
 the
 only
-taurine-type
+taurine
+type
 cattle
 in
 Nepal,
@@ -548,7 +549,8 @@ is
 occasionally
 called
 a
-first-calf
+first
+calf
 heifer.
 Young
 cattle
@@ -776,11 +778,14 @@ adult
 cattle,
 such
 as
-ox-hide,
-ox-blood,
+ox
+hide,
+ox
+blood,
 oxtail,
 or
-ox-liver.[17]
+ox
+liver.[17]
 A
 springer
 is
@@ -955,7 +960,8 @@ for
 a
 cow
 or
-first-calf
+first
+calf
 heifer
 who
 has
@@ -1057,9 +1063,11 @@ exists,
 other
 than
 the
-sex-
+sex
+
 and
-age-specific
+age
+specific
 terms
 such
 as
@@ -1073,7 +1081,8 @@ Historically,
 was
 not
 a
-sex-specific
+sex
+specific
 term
 for
 adult
@@ -1125,7 +1134,8 @@ cattle
 products
 such
 as
-ox-hide
+ox
+hide
 and
 oxtail.[26]
 A
@@ -1154,7 +1164,8 @@ it
 to
 be
 a
-female-specific
+female
+specific
 term.
 Although
 the
@@ -1284,13 +1295,15 @@ and
 clear
 anatomical
 differences.
-Merriam-Webster,
+Merriam
+Webster,
 a
 US
 dictionary,
 recognizes
 the
-sex-nonspecific
+sex
+nonspecific
 use
 of
 "cow"
@@ -1702,7 +1715,8 @@ known
 for
 regurgitating
 and
-re-chewing
+re
+chewing
 their
 food,
 known
@@ -1824,7 +1838,8 @@ synthesize
 amino
 acids
 from
-non-protein
+non
+protein
 nitrogenous
 sources,
 such
@@ -1866,7 +1881,8 @@ cattle
 to
 gain
 a
-high-quality
+high
+quality
 protein
 source.
 These
@@ -1945,7 +1961,9 @@ The
 heaviest
 steer
 was
-eight-year-old
+eight
+year
+old
 ‘Old
 Ben’,
 a
@@ -2026,8 +2044,10 @@ incorrect,
 as
 cattle
 are
-red-green
-color-blind
+red
+green
+color
+blind
 The
 myth
 arose
@@ -2123,7 +2143,8 @@ as
 are
 most
 other
-non-primate
+non
+primate
 land
 mammals.[34][35]
 Udder
@@ -2205,7 +2226,8 @@ over
 Bulls
 have
 a
-fibro-elastic
+fibro
+elastic
 penis.
 Given
 the
@@ -2226,7 +2248,8 @@ is
 quite
 rigid
 when
-non-erect,
+non
+erect,
 and
 becomes
 even
@@ -2292,7 +2315,8 @@ adults
 range
 up
 to
-British-breeds,
+British
+breeds,
 such
 as
 Hereford,
@@ -2307,7 +2331,7 @@ particularly
 with
 Angus
 and
-Hereford.[citation
+Hereford
 needed]
 Bulls
 will
@@ -2591,7 +2615,8 @@ multiple
 regions,
 in
 the
-middle-east
+middle
+east
 and
 India.[45]
 A
@@ -2676,7 +2701,8 @@ southeastern
 Turkey
 and
 Dja'de
-el-Mughara
+el
+Mughara
 in
 northern
 Iraq.[2]
@@ -3036,7 +3062,8 @@ especially
 in
 North
 America.
-Bull-leaping,
+Bull
+leaping,
 a
 central
 ritual
@@ -3145,7 +3172,8 @@ Sleep
 Further
 information:
 Sleep
-(non-human)
+(non
+human)
 The
 average
 sleep
@@ -3234,7 +3262,8 @@ the
 basis
 of
 a
-multi-billion
+multi
+billion
 dollar
 industry
 worldwide.
@@ -3455,7 +3484,8 @@ manure,
 which
 if
 not
-well-managed,
+well
+managed,
 can
 lead
 to
@@ -3648,8 +3678,10 @@ but
 also
 feed
 production,
-forage-based
-cow-calf
+forage
+based
+cow
+calf
 operations,
 backgrounding
 before
@@ -3841,7 +3873,8 @@ or
 more
 in
 any
-12-month
+12
+month
 period
 more
 than
@@ -3856,7 +3889,8 @@ vegetation,
 forage
 growth,
 or
-post-harvest
+post
+harvest
 residues
 are
 not
@@ -3924,7 +3958,9 @@ designated
 only
 on
 a
-case-by-case
+case
+by
+case
 basis.[68]
 
 A
@@ -4201,7 +4237,8 @@ Cattle
 grazing
 in
 a
-high-altitude
+high
+altitude
 environment
 at
 Velika
@@ -4370,7 +4407,8 @@ manure
 storage
 structures.[82]
 The
-100-year
+100
+year
 global
 warming
 potential
@@ -4470,7 +4508,8 @@ produce
 more
 methane
 than
-grain-fed
+grain
+fed
 cattle,
 the
 increase
@@ -4639,7 +4678,8 @@ in
 that
 milk
 from
-tubercolosis-infected
+tubercolosis
+infected
 cattle
 should
 be
@@ -4895,7 +4935,8 @@ plowing,
 transport,
 hauling
 cargo,
-grain-grinding
+grain
+grinding
 by
 trampling
 or
@@ -4923,8 +4964,10 @@ sometimes
 still
 are,
 in
-low-impact,
-select-cut
+low
+impact,
+select
+cut
 logging.
 Oxen
 are
@@ -5061,7 +5104,8 @@ because
 they
 are
 more
-sure-footed.
+sure
+footed.
 
 Many
 oxen
@@ -5080,7 +5124,8 @@ oxen
 are
 used
 in
-sub-Saharan
+sub
+Saharan
 Africa.[105]
 In
 India,
@@ -5258,7 +5303,8 @@ According
 to
 a
 Lodi
-News-Sentinel
+News
+Sentinel
 news
 story
 written
@@ -5346,7 +5392,8 @@ girl
 cow
 herders
 in
-19th-century
+19th
+century
 Norway
 by
 Knud
@@ -5404,7 +5451,8 @@ is
 one
 of
 the
-12-year
+12
+year
 cycle
 of
 animals
@@ -5558,7 +5606,8 @@ case
 of
 Sherwood
 v.
-Walker—involving
+Walker
+involving
 a
 supposedly
 barren
@@ -5566,7 +5615,9 @@ heifer
 that
 was
 actually
-pregnant—-first
+pregnant
+
+first
 enunciated
 the
 concept
@@ -5585,7 +5636,7 @@ the
 minds
 in
 contract
-law.[citation
+law
 needed]
 The
 Fulani
@@ -5597,7 +5648,8 @@ the
 world's
 largest
 nomadic
-cattle-herders.
+cattle
+herders.
 The
 Maasai
 tribe
@@ -5622,4 +5674,3 @@ all
 cattle
 on
 earth.[113]
-
