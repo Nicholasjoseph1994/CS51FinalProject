@@ -44,3 +44,10 @@ char** correctFile (char** incorrect) {
 int compareFiles (char** correct, char** incorrect) {
 	return 0;
 }
+
+int main (void)
+{
+	//TESTING FILETOSTRS
+	
+
+}
