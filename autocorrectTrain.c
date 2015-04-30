@@ -72,7 +72,7 @@ char** inserts(split** splits, char* alphabet) {
     }
     int alphaLen = strlen(alphabet);
     int wordLen = strlen(splits[0]->end);
-    char** inserts = malloc(wordLen * alphaLen * sizeof(char*));
+    char** inserts = malloc((wordLen+1) * alphaLen * sizeof(char*));
     for (int i = 0; i < wordLen; i++) {
         for (int j = 0; j < alphaLen; j++) {
             char* insert = malloc(wordLen + 1);
@@ -85,8 +85,8 @@ char** inserts(split** splits, char* alphabet) {
     for (int j = 0; j < alphaLen; j++) {
         char* insert = malloc(wordLen + 1);
         char insertions[2] = {alphabet[j], '\0'};
-        strcpy(insert, insertions);
-        inserts[wordLen * alphaLen + j] = strcat(strcat(insert, splits[0]->start), splits[0]->end);
+        strcpy(insert, splits[0]->start);
+        inserts[wordLen * alphaLen + j] = strcat(strcat(insert, splits[0]->end), insertions);
 
     }
     return inserts;
