@@ -100,17 +100,17 @@ int main(void)
     for (int i = 0; i < 6; i++)
         printf("%s %s\n", splits_test[i].start, splits_test[i].end);
 
-    // 'test' the deletes function
+    //'test' the deletes function
     // printf("\n========== TESTING DELETES FUNCTION ==========\n");
     // char** deletes_test = deletes(splits_test);
     // for (int i = 0; i < 5; i++)
     //     printf("%s\n", deletes_test[i]);
     
-    // 'test' the transposes function
-    printf("\n========== TESTING TRANSPOSES FUNCTION ==========\n");
-    char** transposes_test = transposes(splits_test);
-    for (int i = 0; i < 4; i++)
-        printf("%s\n", transposes_test[i]);
+    // // 'test' the transposes function
+    // printf("\n========== TESTING TRANSPOSES FUNCTION ==========\n");
+    // char** transposes_test = transposes(splits_test);
+    // for (int i = 0; i < 4; i++)
+    //     printf("%s\n", transposes_test[i]);
 
     return 0;
 }
