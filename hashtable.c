@@ -110,7 +110,8 @@ void freeHash(hash_table* table) {
         while (element != NULL)
         {
             hash_elt* temp = element->next;
-            free(element);
+            free(element->word);
+            free(element->next);
             element = temp;
         }
     }

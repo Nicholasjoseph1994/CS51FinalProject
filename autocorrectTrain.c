@@ -195,11 +195,13 @@ hash_table* known (hash_table* words, hash_table* dict) {
 
 char* correct (char* word, hash_table* dict) {
     hash_table* candidates = NULL;
-
+    printf("in correct");
     if (check(word, dict)) {
+        printf("exit");
         return word;
     }
         
+    printf("got here");
     candidates = known(editDistance1(word), dict); 
     if (is_empty(candidates)) 
     {
@@ -228,6 +230,7 @@ char* correct (char* word, hash_table* dict) {
             currentword = currentword -> next;
         }
     }
+    printf("exit");
     free(candidates);
     return correction;
 }
