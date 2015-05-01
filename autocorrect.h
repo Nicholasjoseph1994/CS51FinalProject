@@ -1,1 +1,0 @@
-char* correct (char* incorrect);
