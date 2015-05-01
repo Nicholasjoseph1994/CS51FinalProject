@@ -17,13 +17,11 @@ char** filetostrs (const char* filename, int numwords) {
 			currentword[i] = tolower(currentword[i]);
 			if (!(isalpha(currentword[i])))
 			{
-				char* firsthalf = malloc(i*sizeof(char));
+				char* firsthalf = malloc((i + 1)*sizeof(char));
 				char* secondhalf = malloc((wordlen - i + 1) * sizeof(char));
 				strncpy(firsthalf, currentword, i);
 				strncpy(secondhalf, currentword + i + 1, wordlen - i);
                 strcpy(currentword, firsthalf);
-                free(firsthalf);
-                free(secondhalf);
 				currentword = strcat(currentword, secondhalf);
                 free(firsthalf);
                 free(secondhalf);
