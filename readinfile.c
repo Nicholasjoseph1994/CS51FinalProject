@@ -19,6 +19,7 @@ char** filetostrs (const char* filename, int numwords) {
 			{
 				char* firsthalf = malloc((i + 1)*sizeof(char));
 				char* secondhalf = malloc((wordlen - i + 1) * sizeof(char));
+                printf("i %d test %s a %s b %s\n", i, currentword, firsthalf, secondhalf);
 				strncpy(firsthalf, currentword, i);
 				strncpy(secondhalf, currentword + i + 1, wordlen - i);
                 strcpy(currentword, firsthalf);
