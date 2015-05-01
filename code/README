@@ -6,5 +6,5 @@ Type ./bloom to run the bloom filter tests
 Type ./trie to run the trie tests
 Type ./test to run the autocorrect algorithm on the communist manifesto
 (If you go the bottom of readinfile.c, you can change which file it is run on)
-./test will probably take quite some time. It runs in 3-4 minutes on my computer. If you want it to run faster you can just change words at the bottom of readinfile.c to be a smaller number (it is the number of words that it autocorrects
+./test will probably take quite some time (after step 3). It runs in 3-4 minutes on my computer. If you want it to run faster you can just change words at the bottom of readinfile.c to be a smaller number (it is the number of words that it autocorrects
 
