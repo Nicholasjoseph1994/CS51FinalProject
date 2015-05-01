@@ -7,7 +7,7 @@
  
 #include <stdlib.h>
 #include "hashtable.h"
-#include <strings.h>
+#include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
 

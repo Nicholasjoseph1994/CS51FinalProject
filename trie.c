@@ -2,7 +2,7 @@
  
 #include <stdlib.h>
 #include "trie.h"
-#include <strings.h>
+#include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <ctype.h>

@@ -10,8 +10,8 @@ all: hashtable bloom trie autocorrect test
 hashtable: hashtable.o hashtableTest.o hashtable.h Makefile
 	$(CC) $(CFLAGS) -o $@ hashtable.o hashtableTest.o
 
-bloom: bloom.o bloomtest.o bloom.h Makefile
-	$(CC) $(CFLAGS) -o $@ bloom.o bloomtest.o
+bloom: bloom.o bloomTest.o bloom.h Makefile
+	$(CC) $(CFLAGS) -o $@ bloom.o bloomTest.o
 
 trie: trie.o trie.h Makefile
 	$(CC) $(CFLAGS) -o $@ trie.o
