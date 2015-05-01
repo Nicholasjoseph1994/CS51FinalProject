@@ -1,5 +1,5 @@
 #include "hashtable.h"
-#define MAXSTRLEN 100
+#define MAXSTRLEN 50
 
 /*
  * Reads an array of strings into a hashtable and returns a pointer to it.

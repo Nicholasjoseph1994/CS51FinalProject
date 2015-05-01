@@ -41,9 +41,7 @@ char** correctWords (char** incorrect, int numWords, hash_table* dict) {
     char** corrects = malloc(numWords * sizeof(char*));
 
     for (int i = 0; i < numWords; i++) {
-        if (i % 100 == 0) {
-            printf("%d\n", i);
-        }
+        printf("%d\n", i);
         corrects[i] = correct(incorrect[i], dict);
     }
     return corrects;
@@ -81,5 +79,22 @@ int main (void)
     printf("here5\n");
     int numberWrong = compareFiles(noErrors, words, correctedVersion);
     printf(" the number we got wrong is %d\n", numberWrong);
+    for (int i = 0; i < words; i++) {
+        free(correctedVersion[i]);
+    }
+    free(correctedVersion);
+    for (int i = 0; i < words; i++) {
+        free(errors[i]);
+    }
+    free(errors);
+    for (int i = 0; i < words; i++) {
+        free(noErrors[i]);
+    }
+    free(noErrors);
+    for (int i = 0; i < 1095639; i++) {
+        free(lotsOfWords[i]);
+    }
+    free(lotsOfWords);
+    freeHash(dict);
 
 }
