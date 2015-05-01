@@ -41,7 +41,6 @@ char** correctWords (char** incorrect, int numWords, hash_table* dict) {
     char** corrects = malloc(numWords * sizeof(char*));
 
     for (int i = 0; i < numWords; i++) {
-        printf("%d\n", i);
         corrects[i] = correct(incorrect[i], dict);
     }
     return corrects;
@@ -65,10 +64,10 @@ int compareFiles (char** original, int numWords, char** ourCorrections) {
 int main (void)
 {
 	//TESTING FILETOSTRS
-    int words = 30;
-    char** noErrors = filetostrs("manifesto.txt", words);
+    int words = 5676;
+    char** noErrors = filetostrs("cattleTest.txt", words);
     printf("here1\n");
-    char** errors = filetostrs("manifestoErrors.txt", words);
+    char** errors = filetostrs("cattleTestIncorrect.txt", words);
     printf("here2\n");
     char** lotsOfWords = filetostrs("bigFormatted.txt", 1095639);
     printf("here3\n");
@@ -79,22 +78,22 @@ int main (void)
     printf("here5\n");
     int numberWrong = compareFiles(noErrors, words, correctedVersion);
     printf(" the number we got wrong is %d\n", numberWrong);
-    for (int i = 0; i < words; i++) {
-        free(correctedVersion[i]);
-    }
-    free(correctedVersion);
-    for (int i = 0; i < words; i++) {
-        free(errors[i]);
-    }
-    free(errors);
-    for (int i = 0; i < words; i++) {
-        free(noErrors[i]);
-    }
-    free(noErrors);
-    for (int i = 0; i < 1095639; i++) {
-        free(lotsOfWords[i]);
-    }
-    free(lotsOfWords);
-    freeHash(dict);
+    /* for (int i = 0; i < words; i++) { */
+    /*     free(correctedVersion[i]); */
+    /* } */
+    /* free(correctedVersion); */
+    /* for (int i = 0; i < words; i++) { */
+    /*     free(errors[i]); */
+    /* } */
+    /* free(errors); */
+    /* for (int i = 0; i < words; i++) { */
+    /*     free(noErrors[i]); */
+    /* } */
+    /* free(noErrors); */
+    /* for (int i = 0; i < 1095639; i++) { */
+    /*     free(lotsOfWords[i]); */
+    /* } */
+    /* free(lotsOfWords); */
+    /* freeHash(dict); */
 
 }

@@ -21,5 +21,6 @@ int main(void)
 
     hash_table* emptydict = create(HASHSIZE);
     assert(is_empty(emptydict));
+    printf("asserts passed\n");
 
 }
