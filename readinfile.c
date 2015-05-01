@@ -24,9 +24,7 @@ char** filetostrs (const char* filename, int numwords) {
 			currentword[i] = tolower(currentword[i]);
 			if (!(isalpha(currentword[i])))
 			{
-                printf("old %s %d\n", currentword, i);
                 removeChar(currentword, i);
-                printf("new %s %d\n", currentword, i);
 				wordlen--;
                 i--;
 			}
