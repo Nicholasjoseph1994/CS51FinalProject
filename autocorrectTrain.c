@@ -19,13 +19,17 @@ split** splits (char* word) {
         s->start = malloc((i+1) * sizeof(char));
         s->end = malloc((len - i + 1) * sizeof(char));
         strncpy(s->start, word, i);
+        s->start[i] = '\0';
         strncpy(s->end, word + i, len-i);
+        s->end[len-i] = '\0';
         splits[i] = s;
     }
     return splits;
 }
 void freeSplits(split** splits, int numSplits) {
     for (int i = 0; i < numSplits; i++) {
+        free(splits[i]->start);
+        free(splits[i]->end);
         free(splits[i]);
     }
     free(splits);
@@ -35,17 +39,10 @@ char** deletes(split** splits) {
         return NULL;
     }
     int wordLen = strlen(splits[0]->end);
-    printf("the wordLen is %d \n", wordLen);
     char** deletes = malloc(wordLen * sizeof(char*));
-    printf("mallocd deletes \n");
     for (int i = 0; i < wordLen; i++) {
         char* delete = malloc(wordLen);
-        printf("about to print delete splits"); 
-        printf("%s \n", splits[i]->start);
         strcpy(delete, splits[i]->start);
-        printf("finished strcpy \n");
-        printf("%s \n", splits[i]->end + 1);
-        printf("%s \n", splits[i]->end);
         deletes[i] = strcat(delete, splits[i]->end + 1);
     }
     return deletes;
@@ -110,41 +107,37 @@ char** inserts(split** splits, char* alphabet) {
 
 //make sure to create the hashtable outside of this function
 hash_table* editDistance1(char* word) {
-    printf("entered ed1 \n");
     hash_table* table = create(HASHSIZE);
-    printf("created tbl \n");
     char* alphabet = "abcdefghijklmnopqrstuvwxyz";
     split** the_splits = splits(word);
-    printf("the splits created \n");
     char** deleted = deletes(the_splits);
-    printf("deleted created \n");
     char** transposed = transposes(the_splits);
-    printf("transposed created \n");
     char** replaced = replaces(the_splits, alphabet);
-    printf("replaced created \n");
     char** inserted = inserts(the_splits, alphabet);
-    printf("inserted created \n");
     freeSplits(the_splits, strlen(word));
 
-    printf("splits freed \n");
 
     int wordLen = strlen(word);
     int alphaLen = strlen(alphabet);
 
     for (int i = 0; i < wordLen; i++) {
         add_word(deleted[i], table);
+        free(deleted[i]);
     }
 
     for (int i = 0; i < wordLen -1; i++) {
         add_word(transposed[i], table);
+        free(transposed[i]);
     }
 
     for (int i = 0; i < (wordLen * alphaLen); i++) {
         add_word(replaced[i], table);
+        free(replaced[i]);
     }
 
     for (int i = 0; i < ((wordLen + 1) * alphaLen); i++) {
         add_word(inserted[i], table);
+        free(inserted[i]);
     }
     free(deleted);
     free(transposed);
@@ -155,7 +148,6 @@ hash_table* editDistance1(char* word) {
 
 hash_table* editDistance2(char* word, hash_table* dictionary) {
     hash_table* edits1 = editDistance1(word);
-    printf("got here\n");
     
     hash_table* edits2 = create(HASHSIZE);
 
@@ -207,27 +199,21 @@ hash_table* known (hash_table* words, hash_table* dict) {
 
 char* correct (char* word, hash_table* dict) {
     hash_table* candidates = NULL;
-    printf("in correct \n");
     if (check(word, dict)) {
-        printf("returning first\n");
         return word;
     }
     hash_table* eDistance = editDistance1(word);
     candidates = known(eDistance, dict); 
+    freeHash(eDistance);
     if (is_empty(candidates)) 
     {
-        printf("about to free 207\n");
         freeHash(candidates);
-        printf("freed 209\n");
         candidates = editDistance2(word, dict);
-        printf("freed 211\n");
         if (is_empty(candidates)) {
-            printf("returning second\n");
             freeHash(candidates);
             return word;
         }
     }
-    printf("got to 214\n");
     int freqmax = 0;
     int freq = 0;
     char* correction;
@@ -245,12 +231,6 @@ char* correct (char* word, hash_table* dict) {
             currentword = currentword -> next;
         }
     }
-<<<<<<< HEAD
-    printf("returning third\n");
     freeHash(candidates);
-=======
-    printf("exit \n");
-    free(candidates);
->>>>>>> f71b9d16911309044771bfc80814f1e7cc17be2a
     return correction;
 }

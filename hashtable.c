@@ -86,7 +86,8 @@ void add_word(char* word, hash_table* mytable)
     hash_elt* new_elt = malloc(sizeof(hash_elt));
     if (new_elt == NULL)
         return;
-    new_elt->word = word;
+    new_elt->word = malloc(strlen(word)+1);
+    strcpy(new_elt->word, word);
     new_elt->freq = 1;
     new_elt->next = mytable->lists[hash_value];
     mytable->lists[hash_value] = new_elt;
