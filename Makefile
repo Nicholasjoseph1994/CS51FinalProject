@@ -5,7 +5,7 @@ CC = clang
 # flags to pass compiler
 CFLAGS = -g -ggdb3 -O0 -Qunused-arguments -std=c99 -Wall -Werror
 
-all: hashtable bloom trie autocorrect
+all: hashtable bloom trie autocorrect test
 
 hashtable: hashtable.o hashtableTest.o hashtable.h Makefile
 	$(CC) $(CFLAGS) -o $@ hashtable.o hashtableTest.o
@@ -19,7 +19,7 @@ trie: trie.o trie.h Makefile
 autocorrect: hashtable.o autocorrectTrain.o autocorrectTrainTest.o autocorrectTrain.h Makefile
 	$(CC) $(CFLAGS) -o $@ hashtable.o autocorrectTrain.o autocorrectTrainTest.o
 
-readinfile: hashtable.o autocorrectTrain.o readinfile.o autocorrectTrain.h Makefile
+test: hashtable.o autocorrectTrain.o readinfile.o autocorrectTrain.h Makefile
 	$(CC) $(CFLAGS) -o $@ hashtable.o autocorrectTrain.o readinfile.o
 # dependencies
 

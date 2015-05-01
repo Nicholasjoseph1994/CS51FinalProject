@@ -25,6 +25,8 @@ char** filetostrs (const char* filename, int numwords) {
                 free(firsthalf);
                 free(secondhalf);
 				currentword = strcat(currentword, secondhalf);
+                free(firsthalf);
+                free(secondhalf);
 				wordlen--;
                 i--;
 			}
@@ -69,7 +71,7 @@ int compareFiles (char** original, int numWords, char** ourCorrections) {
 int main (void)
 {
 	//TESTING FILETOSTRS
-    int words = 4000;
+    int words = 6000;
 	char** noErrors = filetostrs("manifesto.txt", words);
     printf("here1\n");
     char** errors = filetostrs("manifestoErrors.txt", words);
