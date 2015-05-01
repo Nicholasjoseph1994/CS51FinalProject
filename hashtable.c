@@ -68,9 +68,6 @@ int getFrequency(char* word, hash_table* mytable)
 
 void add_word(char* word, hash_table* mytable)
 {
-    if (strlen(word) > 50) {
-        printf("long word %s\n", word);
-    }
     unsigned long hash_value = hash(word);
 
     if (check(word, mytable))
@@ -107,7 +104,7 @@ bool is_empty(hash_table* table) {
 
 void freeHash(hash_table* table) {
 
-    for (int i = 0; i < (HASHSIZE); i++)
+    for (int i = 0; i < table->buckets; i++)
     {
         hash_elt* element = table->lists[i];
         while (element != NULL)
@@ -118,5 +115,6 @@ void freeHash(hash_table* table) {
             element = temp;
         }
     }
+    free(table->lists);
     free(table);
 }

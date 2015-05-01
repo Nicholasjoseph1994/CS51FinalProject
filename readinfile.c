@@ -65,8 +65,8 @@ int compareFiles (char** original, int numWords, char** ourCorrections) {
 int main (void)
 {
 	//TESTING FILETOSTRS
-    int words = 6000;
-	char** noErrors = filetostrs("manifesto.txt", words);
+    int words = 30;
+    char** noErrors = filetostrs("manifesto.txt", words);
     printf("here1\n");
     char** errors = filetostrs("manifestoErrors.txt", words);
     printf("here2\n");
