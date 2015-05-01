@@ -23,6 +23,8 @@ char** filetostrs (const char* filename, int numwords) {
 				strncpy(secondhalf, currentword + i + 1, wordlen - i);
                 strcpy(currentword, firsthalf);
 				currentword = strcat(currentword, secondhalf);
+                free(firsthalf);
+                free(secondhalf);
 				wordlen--;
                 i--;
 			}
