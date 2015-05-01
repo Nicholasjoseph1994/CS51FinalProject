@@ -5,42 +5,23 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <string.h>
+#include <assert.h>
 void print_test(trie_elt* mytrie);
 
 int main(void)
 {
-    printf("main \n");
     trie_elt* dict_head = create();
-    print_test(dict_head);
-    add_word("dog", dict_head);
-    add_word("cat", dict_head);
+    add_word("cow", dict_head);
+    add_word("moo", dict_head);
     add_word("doggy", dict_head);
-    int dog_test = check("dog", dict_head);
-    int toy_test = check("toy", dict_head);
-    int cat_test = check("cat", dict_head);
-    int doggy = check("Dog", dict_head);
-    printf("%d, %d, %d, %d \n", dog_test, toy_test, cat_test, doggy);
-    add_word("dog", dict_head);
-    int dog_freq = getFrequency("dog", dict_head);
-    int doggy_freq = getFrequency("Dog", dict_head);
-    printf("dog frequency is %d \n", dog_freq);
-    printf("Dog freq is %d \n", doggy_freq);
-    /*
-    hash_table* mydict = create(HASHSIZE);
-    add_word("first", mydict);
-    add_word("second", mydict);
-    add_word("first", mydict); 
-    print_test(mydict);
-    bool x = check("first", mydict);
-    printf(x ? "yes":"no");
-    bool y = check("foo", mydict);
-    printf(y ? "yes" : "no");
-    */ 
-}
-
-void print_test(trie_elt* mytrie)
-{
+    assert(check("cow", dict_head));
+    assert(check("moo", dict_head));
+    assert(check("Doggy", dict_head));
+    assert(!check("manure", dict_head));
+    add_word("cow", dict_head);
+    assert(getFrequency("cow", dict_head) == 2);
+    assert(getFrequency("mooo", dict_head) == 0);
+    printf("all asserts passed\n");
 }
 
 trie_elt* create(void)

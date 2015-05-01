@@ -64,36 +64,19 @@ int compareFiles (char** original, int numWords, char** ourCorrections) {
 int main (void)
 {
 	//TESTING FILETOSTRS
-    int words = 5676;
-    char** noErrors = filetostrs("cattleTest.txt", words);
-    printf("here1\n");
-    char** errors = filetostrs("cattleTestIncorrect.txt", words);
-    printf("here2\n");
+    printf("==========Autocorrecting The Communist Manifesto by Marx & Engels========== \n");
+    int words = 11766;
+    char** noErrors = filetostrs("manifesto.txt", words);
+    printf("Step 1: loaded in manifesto with no misspellings (original)\n");
+    char** errors = filetostrs("manifestoErrors.txt", words);
+    printf("Step 2: loaded in manifesto with misspellings\n");
     char** lotsOfWords = filetostrs("bigFormatted.txt", 1095639);
-    printf("here3\n");
     hash_table* dict = readWords(lotsOfWords, 1095639);
-    /* assert(check("branidng", dict) == false); */
-    printf("here4\n");
+    printf("Step 3: loaded in large sample of words to populate our dictionary\n");
     char** correctedVersion = correctWords(errors, words, dict);
-    printf("here5\n");
+    printf("Step 4: ran autocorrect on the misspelled manifesto file\n");
     int numberWrong = compareFiles(noErrors, words, correctedVersion);
-    printf(" the number we got wrong is %d\n", numberWrong);
-    /* for (int i = 0; i < words; i++) { */
-    /*     free(correctedVersion[i]); */
-    /* } */
-    /* free(correctedVersion); */
-    /* for (int i = 0; i < words; i++) { */
-    /*     free(errors[i]); */
-    /* } */
-    /* free(errors); */
-    /* for (int i = 0; i < words; i++) { */
-    /*     free(noErrors[i]); */
-    /* } */
-    /* free(noErrors); */
-    /* for (int i = 0; i < 1095639; i++) { */
-    /*     free(lotsOfWords[i]); */
-    /* } */
-    /* free(lotsOfWords); */
-    /* freeHash(dict); */
-
+    printf("=====Finished=====\n");
+    printf("There were %d words in the file and we got %d wrong\n", words, numberWrong);
+    printf("Our success rate was %f\n", ((float) words - (float) numberWrong) / (float) words);
 }
