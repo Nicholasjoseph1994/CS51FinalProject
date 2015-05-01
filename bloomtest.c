@@ -9,8 +9,8 @@ int main(void) {
     print_filter(testFilter);
     add_word("nick", testFilter);
     add_word("jackie", testFilter);
-    add_word("poop", testFilter);
-    assert(check("poop", testFilter));
+    add_word("manure", testFilter);
+    assert(check("manure", testFilter));
     assert(check("jackie", testFilter));
     assert(!check("testing", testFilter));
 

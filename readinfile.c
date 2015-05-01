@@ -40,7 +40,10 @@ char** correctWords (char** incorrect, int numWords, hash_table* dict) {
     char** corrects = malloc(numWords * sizeof(char*));
 
     for (int i = 0; i < numWords; i++) {
-        printf("%d\n", i);
+        if (i % 100 == 0) {
+            printf("%d\n", i);
+        }
+        /* printf("%d %s\n", i, incorrect[i]); */
         corrects[i] = correct(incorrect[i], dict);
     }
     return corrects;
@@ -53,8 +56,10 @@ int compareFiles (char** correct, int numWords, char** incorrect) {
     int errors = 0;
     for (int i = 0; i < numWords; i++) {
 
-        if (strcmp(correct[i], incorrect[i])!=0) 
+        if (strcmp(correct[i], incorrect[i])!=0)  {
+            printf("%s %s\n", correct[i], incorrect[i]);
             errors++;
+        }
         
     }
     return errors;
@@ -63,17 +68,18 @@ int compareFiles (char** correct, int numWords, char** incorrect) {
 int main (void)
 {
 	//TESTING FILETOSTRS
-	char** noErrors = filetostrs("cattleTest.txt", 5676);
+    int words = 2000;
+	char** noErrors = filetostrs("manifestoErrors.txt", words);
     printf("here1\n");
-    char** errors = filetostrs("cattleTestIncorrect.txt", 5676);
+    char** errors = filetostrs("manifesto.txt", words);
     printf("here2\n");
     char** lotsOfWords = filetostrs("bigFormatted.txt", 1095639);
     printf("here3\n");
     hash_table* dict = readWords(lotsOfWords, 1095639);
     printf("here4\n");
-    char** correctedVersion = correctWords(errors, 5676, dict);
+    char** correctedVersion = correctWords(errors, words, dict);
     printf("here5\n");
-    int numberWrong = compareFiles(noErrors, 5676, correctedVersion);
+    int numberWrong = compareFiles(noErrors, words, correctedVersion);
     printf(" the number we got wrong is %d\n", numberWrong);
 
 }

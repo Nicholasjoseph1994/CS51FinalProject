@@ -47,9 +47,7 @@ unsigned long hash(char *str)
 
 bool check(char* word, hash_table* mytable)
 {
-    if (getFrequency(word, mytable) == 0)
-        return false;
-    else return true;
+    return (getFrequency(word, mytable) != 0);
 }
 
 
@@ -69,6 +67,9 @@ int getFrequency(char* word, hash_table* mytable)
 
 void add_word(char* word, hash_table* mytable)
 {
+    if (strlen(word) > 50) {
+        printf("long word %s\n", word);
+    }
     unsigned long hash_value = hash(word);
 
     if (check(word, mytable))

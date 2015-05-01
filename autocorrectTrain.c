@@ -88,7 +88,7 @@ char** inserts(split** splits, char* alphabet) {
     char** inserts = malloc((wordLen+1) * alphaLen * sizeof(char*));
     for (int i = 0; i < wordLen; i++) {
         for (int j = 0; j < alphaLen; j++) {
-            char* insert = malloc(wordLen + 1);
+            char* insert = malloc(wordLen + 2);
             char insertion [2] = {alphabet[j], '\0'};
             strcpy(insert, splits[i]->start);
             inserts[i*alphaLen+j] = strcat(strcat(insert, insertion), splits[i]->end);
@@ -96,7 +96,7 @@ char** inserts(split** splits, char* alphabet) {
     }
     // deals with inserts on the end
     for (int j = 0; j < alphaLen; j++) {
-        char* insert = malloc(wordLen + 1);
+        char* insert = malloc(wordLen + 2);
         char insertions[2] = {alphabet[j], '\0'};
         strcpy(insert, splits[0]->start);
         inserts[wordLen * alphaLen + j] = strcat(strcat(insert, splits[0]->end), insertions);
@@ -121,21 +121,25 @@ hash_table* editDistance1(char* word) {
     int alphaLen = strlen(alphabet);
 
     for (int i = 0; i < wordLen; i++) {
+        /* printf("deetes\n"); */
         add_word(deleted[i], table);
         free(deleted[i]);
     }
 
     for (int i = 0; i < wordLen -1; i++) {
+        /* printf("transpsoed\n"); */
         add_word(transposed[i], table);
         free(transposed[i]);
     }
 
     for (int i = 0; i < (wordLen * alphaLen); i++) {
+        /* printf("repleced\n"); */
         add_word(replaced[i], table);
         free(replaced[i]);
     }
 
     for (int i = 0; i < ((wordLen + 1) * alphaLen); i++) {
+        /* printf("iinserted\n"); */
         add_word(inserted[i], table);
         free(inserted[i]);
     }
@@ -157,6 +161,7 @@ hash_table* editDistance2(char* word, hash_table* dictionary) {
         while (elt != NULL)
         {
             // finds all the words that are edit distance 1 from each word
+            /* printf("elt %s\n", elt->word); */
             hash_table* two_away = editDistance1(elt->word);
 
             // adds all of those words to edits2
@@ -202,18 +207,28 @@ char* correct (char* word, hash_table* dict) {
     if (check(word, dict)) {
         return word;
     }
+    /* printf("205\n"); */
     hash_table* eDistance = editDistance1(word);
+    /* printf("207\n"); */
     candidates = known(eDistance, dict); 
+    /* printf("209\n"); */
     freeHash(eDistance);
+    /* printf("211\n"); */
     if (is_empty(candidates)) 
     {
+        /* printf("214\n"); */
         freeHash(candidates);
+        /* printf("216\n"); */
         candidates = editDistance2(word, dict);
+        /* printf("218\n"); */
         if (is_empty(candidates)) {
+            /* printf("220\n"); */
             freeHash(candidates);
+            /* printf("222\n"); */
             return word;
         }
     }
+    /* printf("226\n"); */
     int freqmax = 0;
     int freq = 0;
     char* correction;

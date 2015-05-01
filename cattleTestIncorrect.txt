@@ -1,3 +1,4 @@
+hippopotamuses,
 Cattle
 cololquially
 cows
@@ -1003,7 +1004,6 @@ large
 animals,
 icnluding
 whlaes,
-hippopotamuses,
 camels,
 elk
 and
