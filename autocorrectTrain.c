@@ -121,25 +121,21 @@ hash_table* editDistance1(char* word) {
     int alphaLen = strlen(alphabet);
 
     for (int i = 0; i < wordLen; i++) {
-        /* printf("deetes\n"); */
         add_word(deleted[i], table);
         free(deleted[i]);
     }
 
     for (int i = 0; i < wordLen -1; i++) {
-        /* printf("transpsoed\n"); */
         add_word(transposed[i], table);
         free(transposed[i]);
     }
 
     for (int i = 0; i < (wordLen * alphaLen); i++) {
-        /* printf("repleced\n"); */
         add_word(replaced[i], table);
         free(replaced[i]);
     }
 
     for (int i = 0; i < ((wordLen + 1) * alphaLen); i++) {
-        /* printf("iinserted\n"); */
         add_word(inserted[i], table);
         free(inserted[i]);
     }
@@ -161,7 +157,6 @@ hash_table* editDistance2(char* word, hash_table* dictionary) {
         while (elt != NULL)
         {
             // finds all the words that are edit distance 1 from each word
-            /* printf("elt %s\n", elt->word); */
             hash_table* two_away = editDistance1(elt->word);
 
             // adds all of those words to edits2
@@ -207,28 +202,18 @@ char* correct (char* word, hash_table* dict) {
     if (check(word, dict)) {
         return word;
     }
-    /* printf("205\n"); */
     hash_table* eDistance = editDistance1(word);
-    /* printf("207\n"); */
     candidates = known(eDistance, dict); 
-    /* printf("209\n"); */
     freeHash(eDistance);
-    /* printf("211\n"); */
     if (is_empty(candidates)) 
     {
-        /* printf("214\n"); */
         freeHash(candidates);
-        /* printf("216\n"); */
         candidates = editDistance2(word, dict);
-        /* printf("218\n"); */
         if (is_empty(candidates)) {
-            /* printf("220\n"); */
             freeHash(candidates);
-            /* printf("222\n"); */
             return word;
         }
     }
-    /* printf("226\n"); */
     int freqmax = 0;
     int freq = 0;
     char* correction;
@@ -246,6 +231,8 @@ char* correct (char* word, hash_table* dict) {
             currentword = currentword -> next;
         }
     }
+    char* retValue = malloc(strlen(correction) + 1);
+    strcpy(retValue, correction);
     freeHash(candidates);
-    return correction;
+    return retValue;
 }

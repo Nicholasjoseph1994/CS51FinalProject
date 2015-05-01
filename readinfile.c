@@ -1,6 +1,7 @@
 #include "autocorrectTrain.h"
 #include <string.h>
 #include <ctype.h>
+#include <assert.h>
 
 // changes txt file to list of strings, removes punctuation, makes lowercase
 char** filetostrs (const char* filename, int numwords) {
@@ -43,7 +44,6 @@ char** correctWords (char** incorrect, int numWords, hash_table* dict) {
         if (i % 100 == 0) {
             printf("%d\n", i);
         }
-        /* printf("%d %s\n", i, incorrect[i]); */
         corrects[i] = correct(incorrect[i], dict);
     }
     return corrects;
@@ -51,13 +51,12 @@ char** correctWords (char** incorrect, int numWords, hash_table* dict) {
 
 // compares the corrected list of words to the list of incorrected words, returns
 // integer number of disagreements
-int compareFiles (char** correct, int numWords, char** incorrect) {
+int compareFiles (char** original, int numWords, char** ourCorrections) {
 
     int errors = 0;
     for (int i = 0; i < numWords; i++) {
 
-        if (strcmp(correct[i], incorrect[i])!=0)  {
-            printf("%s %s\n", correct[i], incorrect[i]);
+        if (strcmp(original[i], ourCorrections[i])!=0)  {
             errors++;
         }
         
@@ -68,14 +67,15 @@ int compareFiles (char** correct, int numWords, char** incorrect) {
 int main (void)
 {
 	//TESTING FILETOSTRS
-    int words = 2000;
-	char** noErrors = filetostrs("manifestoErrors.txt", words);
+    int words = 4000;
+	char** noErrors = filetostrs("manifesto.txt", words);
     printf("here1\n");
-    char** errors = filetostrs("manifesto.txt", words);
+    char** errors = filetostrs("manifestoErrors.txt", words);
     printf("here2\n");
     char** lotsOfWords = filetostrs("bigFormatted.txt", 1095639);
     printf("here3\n");
     hash_table* dict = readWords(lotsOfWords, 1095639);
+    /* assert(check("branidng", dict) == false); */
     printf("here4\n");
     char** correctedVersion = correctWords(errors, words, dict);
     printf("here5\n");
