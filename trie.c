@@ -1,11 +1,11 @@
 // This is the trie!
- 
 #include <stdlib.h>
 #include "trie.h"
 #include <strings.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 void print_test(trie_elt* mytrie);
 
 int main(void)

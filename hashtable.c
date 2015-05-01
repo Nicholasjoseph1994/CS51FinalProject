@@ -10,6 +10,7 @@
 #include <strings.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 void print(hash_table* mydict)
 {
