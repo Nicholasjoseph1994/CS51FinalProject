@@ -3,36 +3,33 @@
 #include <ctype.h>
 #include <assert.h>
 
+void removeChar(char* str, int index) {
+    int len = strlen(str);
+    for (int i = index; i < len; i++) {
+        str[i] = str[i+1];
+    }
+
+}
 // changes txt file to list of strings, removes punctuation, makes lowercase
 char** filetostrs (const char* filename, int numwords) {
 	FILE* fp = fopen(filename, "r");
 	if (fp == NULL) return NULL;
-	char* currentword = malloc(MAXSTRLEN * sizeof(char));
-	fgets(currentword, MAXSTRLEN, fp);
 	char** strlist = malloc(numwords * sizeof(char*));
     for (int index = 0; index < numwords; index++) {
+        char* currentword = malloc(MAXSTRLEN * sizeof(char));
+		fgets(currentword, MAXSTRLEN, fp);
 		int wordlen = strlen(currentword);
 		for (int i = 0; i < wordlen; i++)
 		{
 			currentword[i] = tolower(currentword[i]);
 			if (!(isalpha(currentword[i])))
 			{
-				char* firsthalf = malloc((i + 1)*sizeof(char));
-				char* secondhalf = malloc((wordlen - i + 1) * sizeof(char));
-                printf("i %d test %s a %s b %s\n", i, currentword, firsthalf, secondhalf);
-				strncpy(firsthalf, currentword, i);
-				strncpy(secondhalf, currentword + i + 1, wordlen - i);
-                strcpy(currentword, firsthalf);
-				currentword = strcat(currentword, secondhalf);
-                free(firsthalf);
-                free(secondhalf);
+                removeChar(currentword, i);
 				wordlen--;
                 i--;
 			}
 		}
 		strlist[index] = currentword;
-        currentword = malloc(MAXSTRLEN * sizeof(char));
-		fgets(currentword, MAXSTRLEN, fp);
 	}
 	fclose(fp);
 	return strlist;
